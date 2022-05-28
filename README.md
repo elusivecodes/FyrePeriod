@@ -409,7 +409,7 @@ This method will return a new *PeriodCollection*.
 
 Intersect a period with every period in the collection.
 
-- `$period* is the [*Period*](#periods) to compare against.
+- `$period` is the [*Period*](#periods) to compare against.
 
 ```php
 $intersect = $collection->intersect($period);
@@ -443,7 +443,7 @@ This method will return a new *PeriodCollection*.
 
 Get the inverse overlap of the collections.
 
-- `$others* is the *PeriodCollection* to compare against.
+- `$others` is the *PeriodCollection* to compare against.
 
 ```php
 $subtract = $collection->subtract($others);
