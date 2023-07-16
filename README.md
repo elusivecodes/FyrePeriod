@@ -78,7 +78,7 @@ Get the end date.
 $end = $period->end();
 ```
 
-This method will return a [*DateTimeImmutable*](https://github.com/elusivecodes/FyreDateTime).
+This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateTime).
 
 **End Equals**
 
@@ -168,7 +168,7 @@ Get the included end date.
 $includedEnd = $period->includedEnd();
 ```
 
-This method will return a [*DateTimeImmutable*](https://github.com/elusivecodes/FyreDateTime).
+This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateTime).
 
 **Included Start**
 
@@ -178,7 +178,7 @@ Get the included start date.
 $includedStart = $period->includedStart();
 ```
 
-This method will return a [*DateTimeImmutable*](https://github.com/elusivecodes/FyreDateTime).
+This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateTime).
 
 **Includes End**
 
@@ -274,7 +274,7 @@ Get the start date.
 $start = $period->start();
 ```
 
-This method will return a [*DateTimeImmutable*](https://github.com/elusivecodes/FyreDateTime).
+This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateTime).
 
 **Start Equals**
 
