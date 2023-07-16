@@ -30,16 +30,11 @@ use Fyre\Period\PeriodCollection;
 
 - `$start` is a [*DateTime*](https://github.com/elusivecodes/FyreDateTime) or string representing the start date.
 - `$end` is a [*DateTime*](https://github.com/elusivecodes/FyreDateTime) or string representing the end date.
-- `$options` is an array containing the period options.
-    - `granularity` is a string representing the granularity, and can be one of either "*year*", "*month*", "*day*", "*hour*", "*minute*" or "*second*".
-    - `excludeBoundaries` is a string representing the excluded boundaries, and can be one of either "*none*", "*start*", "*end*" or "*both*".
-
-If the `granularity` option is omitted, the default value used will be "*day*".
-
-If the `excludeBoundaries` option is omitted, the default value used will be "*none*".
+- `$granularity` is a string representing the granularity, and can be one of either "*year*", "*month*", "*day*", "*hour*", "*minute*" or "*second*", and will default to "*day*".
+- `$excludeBoundaries` is a string representing the excluded boundaries, and can be one of either "*none*", "*start*", "*end*" or "*both*", and will default to "*none*".
 
 ```php
-$period = new Period($start, $end, $options);
+$period = new Period($start, $end, $granularity, $excludeBoundaries);
 ```
 
 The *Period* is an implementation of an *Iterator* and can be used in a foreach loop.

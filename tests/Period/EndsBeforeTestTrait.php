@@ -28,7 +28,7 @@ trait EndsBeforeTestTrait
     public function testEndsBeforeBeforeExcludeEnd(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
                 ->endsBefore(new DateTime('2022-01-14'))
         );
     }
@@ -44,7 +44,7 @@ trait EndsBeforeTestTrait
     public function testEndsBeforeAfterExcludeEnd(): void
     {
         $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
                 ->endsBefore(new DateTime('2022-01-15'))
         );
     }

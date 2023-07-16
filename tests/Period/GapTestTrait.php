@@ -40,7 +40,7 @@ trait GapTestTrait
     public function testGapStartAfterExcludeStart(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-15', '2022-01-20', excludeBoundaries: 'start');
         $period3 = $period1->gap($period2);
 
         $this->assertSame(
@@ -71,7 +71,7 @@ trait GapTestTrait
 
     public function testGapEndAfterExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end');
         $period2 = new Period('2022-01-15', '2022-01-20');
         $period3 = $period1->gap($period2);
 
@@ -110,7 +110,7 @@ trait GapTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
 
         $period1->gap($period2);
     }

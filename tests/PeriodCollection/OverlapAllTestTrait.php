@@ -70,12 +70,12 @@ trait OverlapAllTestTrait
 
     public function testOverlapAllExclude(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-05', ['excludeBoundaries' => 'both']);
-        $period2 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'both']);
+        $period1 = new Period('2022-01-01', '2022-01-05', excludeBoundaries: 'both');
+        $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'both');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-08', ['excludeBoundaries' => 'both']);
-        $period4 = new Period('2022-01-08','2022-01-13', ['excludeBoundaries' => 'both']);
+        $period3 = new Period('2022-01-03','2022-01-08', excludeBoundaries: 'both');
+        $period4 = new Period('2022-01-08','2022-01-13', excludeBoundaries: 'both');
         $collection2 = new PeriodCollection($period3, $period4);
 
         $collection3 = $collection1->overlapAll($collection2);

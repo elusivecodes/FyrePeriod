@@ -49,7 +49,7 @@ trait OverlapAllTestTrait
 
         $period1 = new Period('2022-01-01', '2022-01-10');
         $period2 = new Period('2022-01-05', '2022-01-20');
-        $period3 = new Period('2022-01-25', '2022-01-30', ['granularity' => 'hour']);
+        $period3 = new Period('2022-01-25', '2022-01-30', 'hour');
 
         $period1->overlapAll($period2, $period3);
     }

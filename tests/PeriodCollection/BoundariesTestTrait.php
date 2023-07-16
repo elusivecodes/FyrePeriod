@@ -44,8 +44,8 @@ trait BoundariesTestTrait
 
     public function testBoundariesAfterExclude(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']);
-        $period2 = new Period('2022-01-05', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start');
+        $period2 = new Period('2022-01-05', '2022-01-15', excludeBoundaries: 'end');
         $collection = new PeriodCollection($period1, $period2);
 
         $period3 = $collection->boundaries();
@@ -90,8 +90,8 @@ trait BoundariesTestTrait
 
     public function testBoundariesBeforeExclude(): void
     {
-        $period1 = new Period('2022-01-05', '2022-01-15', ['excludeBoundaries' => 'end']);
-        $period2 = new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-05', '2022-01-15', excludeBoundaries: 'end');
+        $period2 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start');
         $collection = new PeriodCollection($period1, $period2);
 
         $period3 = $collection->boundaries();

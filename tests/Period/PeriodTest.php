@@ -94,14 +94,14 @@ final class PeriodTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new Period('2022-01-01', '2022-01-10', ['granularity' => 'invalid']);
+        new Period('2022-01-01', '2022-01-10', 'invalid');
     }
 
     public function testConstructorInvalidExcludeBoundaries(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'invalid']);
+        new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'invalid');
     }
 
     public function testLength(): void
@@ -116,7 +116,7 @@ final class PeriodTest extends TestCase
     {
         $this->assertSame(
             8,
-            (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->length()
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->length()
         );
     }
 
@@ -124,7 +124,7 @@ final class PeriodTest extends TestCase
     {
         $this->assertSame(
             8,
-            (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']))->length()
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end'))->length()
         );
     }
 
@@ -132,7 +132,7 @@ final class PeriodTest extends TestCase
     {
         $this->assertSame(
             24,
-            (new Period('2022-01-01', '2022-01-02', ['granularity' => 'hour']))->length()
+            (new Period('2022-01-01', '2022-01-02', 'hour'))->length()
         );
     }
 
@@ -170,7 +170,7 @@ final class PeriodTest extends TestCase
     {
         $this->assertSame(
             'hour',
-            (new Period('2022-01-01', '2022-01-10', ['granularity' => 'hour']))->granularity()
+            (new Period('2022-01-01', '2022-01-10', 'hour'))->granularity()
         );
     }
 
@@ -191,7 +191,7 @@ final class PeriodTest extends TestCase
 
     public function testIncludedEndExcludeEnd(): void
     {
-        $includedEnd = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']))->includedEnd();
+        $includedEnd = (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end'))->includedEnd();
 
         $this->assertInstanceOf(
             DateTime::class,
@@ -221,7 +221,7 @@ final class PeriodTest extends TestCase
 
     public function testIncludedStartExcludeStart(): void
     {
-        $includedStart = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->includedStart();
+        $includedStart = (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->includedStart();
 
         $this->assertInstanceOf(
             DateTime::class,
@@ -244,7 +244,7 @@ final class PeriodTest extends TestCase
     public function testIncludesEndExcludeEnd(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']))->includesEnd()
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end'))->includesEnd()
         );
     }
 
@@ -258,7 +258,7 @@ final class PeriodTest extends TestCase
     public function testIncludesStartExcludeStart(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->includesStart()
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->includesStart()
         );
     }
 
@@ -279,7 +279,7 @@ final class PeriodTest extends TestCase
 
     public function testStartExcludeStart(): void
     {
-        $start = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->start();
+        $start = (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->start();
 
         $this->assertInstanceOf(
             DateTime::class,
@@ -294,7 +294,7 @@ final class PeriodTest extends TestCase
 
     public function testIteration(): void
     {
-        $period = new Period('2022-01-01', '2022-01-02', ['granularity' => 'hour']);
+        $period = new Period('2022-01-01', '2022-01-02', 'hour');
 
         $dates = [];
         foreach ($period AS $date) {
@@ -340,7 +340,7 @@ final class PeriodTest extends TestCase
 
     public function testIterationExcludeBoth(): void
     {
-        $period = new Period('2022-01-01', '2022-01-02', ['granularity' => 'hour', 'excludeBoundaries' => 'both']);
+        $period = new Period('2022-01-01', '2022-01-02', 'hour', 'both');
 
         $dates = [];
         foreach ($period AS $date) {

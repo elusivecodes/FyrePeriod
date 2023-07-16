@@ -28,7 +28,7 @@ trait StartEqualsTestTrait
     public function testStartEqualsBeforeExcludeStart(): void
     {
         $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
                 ->startEquals(new DateTime('2022-01-02'))
         );
     }
@@ -44,7 +44,7 @@ trait StartEqualsTestTrait
     public function testStartEqualsAfterExcludeStart(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
                 ->startEquals(new DateTime('2022-01-01'))
         );
     }

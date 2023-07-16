@@ -28,7 +28,7 @@ trait IncludesTestTrait
     public function testIncludesStartBeforeExcludeStart(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
                 ->includes(new DateTime('2022-01-01'))
         );
     }
@@ -45,7 +45,7 @@ trait IncludesTestTrait
     public function testIncludesStartAfterExcludeStart(): void
     {
         $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
                 ->includes(new DateTime('2022-01-02'))
         );
     }
@@ -69,7 +69,7 @@ trait IncludesTestTrait
     public function testIncludesEndBeforeExcludeEnd(): void
     {
         $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
                 ->includes(new DateTime('2022-01-14'))
         );
     }
@@ -85,7 +85,7 @@ trait IncludesTestTrait
     public function testIncludesEndAfterExcludeEnd(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
                 ->includes(new DateTime('2022-01-15'))
         );
     }

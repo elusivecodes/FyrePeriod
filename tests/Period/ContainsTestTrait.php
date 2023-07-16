@@ -31,7 +31,7 @@ trait ContainsTestTrait
 
     public function testContainsStartAfterExcludeStart(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
         $period2 = new Period('2022-01-02', '2022-01-14');
 
         $this->assertTrue(
@@ -52,7 +52,7 @@ trait ContainsTestTrait
     public function testContainsStartBeforeExcludeStart(): void
     {
         $period1 = new Period('2022-01-02', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-14', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-01', '2022-01-14', excludeBoundaries: 'start');
 
         $this->assertTrue(
             $period1->contains($period2)
@@ -72,7 +72,7 @@ trait ContainsTestTrait
     public function testContainsEndAfterExcludeEnd(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-14');
-        $period2 = new Period('2022-01-02', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period2 = new Period('2022-01-02', '2022-01-15', excludeBoundaries: 'end');
 
         $this->assertTrue(
             $period1->contains($period2)
@@ -91,7 +91,7 @@ trait ContainsTestTrait
 
     public function testContainsEndBeforeExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end');
         $period2 = new Period('2022-01-02', '2022-01-14');
 
         $this->assertTrue(
@@ -114,7 +114,7 @@ trait ContainsTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
 
         $period1->contains($period2);
     }

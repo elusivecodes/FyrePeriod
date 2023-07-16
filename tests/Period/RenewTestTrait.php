@@ -37,7 +37,7 @@ trait RenewTestTrait
 
     public function testRenewExcludeStart(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
         $period2 = $period1->renew();
 
         $this->assertSame(
@@ -61,7 +61,7 @@ trait RenewTestTrait
 
     public function testRenewExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end');
         $period2 = $period1->renew();
 
         $this->assertSame(
@@ -85,7 +85,7 @@ trait RenewTestTrait
 
     public function testRenewExcludeBoth(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'both']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'both');
         $period2 = $period1->renew();
 
         $this->assertSame(
@@ -109,7 +109,7 @@ trait RenewTestTrait
 
     public function testRenewGranularity(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['granularity' => 'hour']);
+        $period1 = new Period('2022-01-01', '2022-01-15', 'hour');
         $period2 = $period1->renew();
     
         $this->assertSame(

@@ -65,7 +65,7 @@ trait SubtractTestTrait
     public function testSubtractStartAfterExcludeStart(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
         $collection = $period1->subtract($period2);
 
         $this->assertCount(
@@ -107,7 +107,7 @@ trait SubtractTestTrait
     public function testSubtractStartBeforeExcludeStart(): void
     {
         $period1 = new Period('2022-01-10', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-01', '2022-01-20', excludeBoundaries: 'start');
         $collection = $period1->subtract($period2);
 
         $this->assertCount(
@@ -149,7 +149,7 @@ trait SubtractTestTrait
     public function testSubtractEndAfterExcludeStart(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
         $collection = $period1->subtract($period2);
 
         $this->assertCount(
@@ -227,7 +227,7 @@ trait SubtractTestTrait
     public function testSubtractEndBeforeExcludeBoth(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-20');
-        $period2 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'both']);
+        $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'both');
         $collection = $period1->subtract($period2);
 
         $this->assertCount(
@@ -299,7 +299,7 @@ trait SubtractTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
 
         $period1->subtract($period2);
     }

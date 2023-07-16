@@ -49,7 +49,7 @@ trait OverlapTestTrait
     public function testOverlapStartAfterExcludeStart(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
         $period3 = $period1->overlap($period2);
 
         $this->assertSame(
@@ -98,7 +98,7 @@ trait OverlapTestTrait
 
     public function testOverlapStartBeforeExcludeStart(): void
     {
-        $period1 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'start');
         $period2 = new Period('2022-01-01', '2022-01-20');
         $period3 = $period1->overlap($period2);
 
@@ -148,7 +148,7 @@ trait OverlapTestTrait
 
     public function testOverlapEndAfterExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end');
         $period2 = new Period('2022-01-10', '2022-01-20');
         $period3 = $period1->overlap($period2);
 
@@ -199,7 +199,7 @@ trait OverlapTestTrait
     public function testOverlapEndBeforeExcludeEnd(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-20');
-        $period2 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'end');
         $period3 = $period1->overlap($period2);
 
         $this->assertSame(
@@ -236,7 +236,7 @@ trait OverlapTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
 
         $period1->overlap($period2);
     }

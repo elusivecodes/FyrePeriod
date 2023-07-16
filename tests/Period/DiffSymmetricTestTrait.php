@@ -88,7 +88,7 @@ trait DiffSymmetricTestTrait
     public function testDiffSymmetricStartAfterExcludeStart(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
         $collection = $period1->diffSymmetric($period2);
 
         $this->assertCount(
@@ -183,7 +183,7 @@ trait DiffSymmetricTestTrait
 
     public function testDiffSymmetricStartBeforeExcludeStart(): void
     {
-        $period1 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'start');
         $period2 = new Period('2022-01-01', '2022-01-20');
         $collection = $period1->diffSymmetric($period2);
 
@@ -279,7 +279,7 @@ trait DiffSymmetricTestTrait
 
     public function testDiffSymmetricEndAfterExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end');
         $period2 = new Period('2022-01-10', '2022-01-20');
         $collection = $period1->diffSymmetric($period2);
 
@@ -376,7 +376,7 @@ trait DiffSymmetricTestTrait
     public function testDiffSymmetricEndBeforeExcludeEnd(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-20');
-        $period2 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'end']);
+        $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'end');
         $collection = $period1->diffSymmetric($period2);
 
         $this->assertCount(
@@ -474,7 +474,7 @@ trait DiffSymmetricTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
 
         $period1->diffSymmetric($period2);
     }

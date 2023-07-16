@@ -67,10 +67,12 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
             }
         }
 
-        return new Period($firstPeriod->start(), $lastPeriod->end(), [
-            'granularity' => $firstPeriod->granularity(),
-            'excludeBoundaries' => Period::getBoundaries($firstPeriod->includesStart(), $lastPeriod->includesEnd())
-        ]);
+        return new Period(
+            $firstPeriod->start(),
+            $lastPeriod->end(),
+            $firstPeriod->granularity(),
+            Period::getBoundaries($firstPeriod->includesStart(), $lastPeriod->includesEnd())
+        );
     }
 
     /**

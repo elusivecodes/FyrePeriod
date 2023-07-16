@@ -51,7 +51,7 @@ trait TouchesTestTrait
 
     public function testTouchesEndBeforeExcludeStart(): void
     {
-        $period1 = new Period('2022-01-09', '2022-01-20', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-09', '2022-01-20', excludeBoundaries: 'start');
         $period2 = new Period('2022-01-01', '2022-01-10');
 
         $this->assertTrue(
@@ -62,7 +62,7 @@ trait TouchesTestTrait
     public function testTouchesEndBeforeExcludeEnd(): void
     {
         $period1 = new Period('2022-01-09', '2022-01-20');
-        $period2 = new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']);
+        $period2 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end');
 
         $this->assertTrue(
             $period1->touches($period2)
@@ -74,7 +74,7 @@ trait TouchesTestTrait
         $this->expectException(RuntimeException::class);
 
         $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-10', '2022-01-20', ['granularity' => 'hour']);
+        $period2 = new Period('2022-01-10', '2022-01-20', 'hour');
 
         $period1->touches($period2);
     }

@@ -43,16 +43,20 @@ trait PeriodOperationsTrait
         }
 
         if ($this->includedStart->isAfter($other->includedEnd())) {
-            return new static($other->end(), $this->start, [
-                'granularity' => $this->granularity,
-                'excludeBoundaries' => static::getBoundaries(!$other->includesEnd(), !$this->includesStart)
-            ]);
+            return new static(
+                $other->end(),
+                $this->start,
+                $this->granularity,
+                static::getBoundaries(!$other->includesEnd(), !$this->includesStart)
+            );
         }
 
-        return new static($this->end, $other->start(), [
-            'granularity' => $this->granularity,
-            'excludeBoundaries' => static::getBoundaries(!$this->includesEnd, !$other->includesStart())
-        ]);
+        return new static(
+            $this->end,
+            $other->start(),
+            $this->granularity,
+            static::getBoundaries(!$this->includesEnd, !$other->includesStart())
+        );
     }
 
     /**
@@ -74,10 +78,12 @@ trait PeriodOperationsTrait
             return null;
         }
 
-        return new static($startPeriod->start(), $endPeriod->end(), [
-            'granularity' => $this->granularity,
-            'excludeBoundaries' => static::getBoundaries($startPeriod->includesStart(), $endPeriod->includesEnd())
-        ]);
+        return new static(
+            $startPeriod->start(),
+            $endPeriod->end(),
+            $this->granularity,
+            static::getBoundaries($startPeriod->includesStart(), $endPeriod->includesEnd())
+        );
     }
 
     /**
@@ -87,10 +93,12 @@ trait PeriodOperationsTrait
      */
     public function overlapAll(Period ...$others): static|null
     {
-        $overlap = new static($this->start, $this->end, [
-            'granularity' => $this->granularity,
-            'excludeBoundaries' => static::getBoundaries($this->includesStart, $this->includesEnd)
-        ]);
+        $overlap = new static(
+            $this->start,
+            $this->end,
+            $this->granularity,
+            static::getBoundaries($this->includesStart, $this->includesEnd)
+        );
 
         foreach ($others AS $other) {
             $overlap = $overlap->overlap($other);
@@ -133,10 +141,12 @@ trait PeriodOperationsTrait
     {
         $diff = $this->end->diff($this->start, $this->granularity);
 
-        return new static($this->end, $this->end->add($diff, $this->granularity), [
-            'granularity' => $this->granularity,
-            'excludeBoundaries' => static::getBoundaries($this->includesStart, $this->includesEnd)
-        ]);
+        return new static(
+            $this->end,
+            $this->end->add($diff, $this->granularity),
+            $this->granularity,
+            static::getBoundaries($this->includesStart, $this->includesEnd)
+        );
     }
 
     /**
@@ -155,17 +165,21 @@ trait PeriodOperationsTrait
         $subtractions = [];
 
         if ($this->includedStart->isBefore($other->includedStart())) {
-            $subtractions[] = new static($this->start, $other->start(), [
-                'granularity' => $this->granularity,
-                'excludeBoundaries' => static::getBoundaries($this->includesStart, !$other->includesStart())
-            ]);
+            $subtractions[] = new static(
+                $this->start,
+                $other->start(),
+                $this->granularity,
+                static::getBoundaries($this->includesStart, !$other->includesStart())
+            );
         }
 
         if ($this->includedEnd->isAfter($other->includedEnd())) {
-            $subtractions[] = new static($other->end(), $this->end, [
-                'granularity' => $this->granularity,
-                'excludeBoundaries' => static::getBoundaries(!$other->includesEnd(), $this->includesEnd)
-            ]);
+            $subtractions[] = new static(
+                $other->end(),
+                $this->end,
+                $this->granularity,
+                static::getBoundaries(!$other->includesEnd(), $this->includesEnd)
+            );
         }
 
         return new PeriodCollection(...$subtractions);

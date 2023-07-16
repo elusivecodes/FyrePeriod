@@ -58,17 +58,18 @@ class Period implements Countable, Iterator
      * New Period constructor.
      * @param DateTime|null $start The start date.
      * @param DateTime|null $end The end date.
-     * @param array $options The Period options.
+     * @param string $granularity The granularity.
+     * @param string $excludeBoundaries The boundaries to exclude.
      * @throws InvalidArgumentException if the granularity or boundaries are not valid.
      * @throws RuntimeException If the end date is before the start date.
      */
-    public function __construct(DateTime|string $start, DateTime|string $end, array $options = [])
+    public function __construct(DateTime|string $start, DateTime|string $end, string $granularity = 'day', string $excludeBoundaries = 'none')
     {
         $this->start = static::createDate($start);
         $this->end = static::createDate($end);
 
-        $granularity = strtolower($options['granularity'] ?? 'day');
-        $excludeBoundaries = strtolower($options['excludeBoundaries'] ?? 'none');
+        $granularity = strtolower($granularity);
+        $excludeBoundaries = strtolower($excludeBoundaries);
 
         if (!in_array($granularity, static::GRANULARITIES)) {
             throw new InvalidArgumentException('Invalid granularity: '.$granularity);

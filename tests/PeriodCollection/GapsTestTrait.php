@@ -48,8 +48,8 @@ trait GapsTestTrait
 
     public function testGapsExclude(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-05', ['excludeBoundaries' => 'end']);
-        $period2 = new Period('2022-01-10', '2022-01-15', ['excludeBoundaries' => 'start']);
+        $period1 = new Period('2022-01-01', '2022-01-05', excludeBoundaries: 'end');
+        $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'start');
         $collection1 = new PeriodCollection($period1, $period2);
 
         $collection2 = $collection1->gaps();
