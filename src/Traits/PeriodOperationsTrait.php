@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Fyre\Period\Traits;
 
-use
-    Fyre\Period\Period,
-    Fyre\Period\PeriodCollection;
+use Fyre\Period\Period;
+use Fyre\Period\PeriodCollection;
 
 /**
  * PeriodOperationsTrait

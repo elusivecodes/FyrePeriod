@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\PeriodCollection;
 
-use
-    Fyre\Period\Period,
-    Fyre\Period\PeriodCollection;
+use Fyre\Period\Period;
+use Fyre\Period\PeriodCollection;
 
-trait SubtractTest
+trait SubtractTestTrait
 {
 
     public function testSubtract(): void

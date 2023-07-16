@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Fyre\Period\Traits;
 
-use
-    Fyre\DateTime\DateTimeInterface,
-    Fyre\Period\Period;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
 
 /**
  * PeriodComparisonTrait
@@ -28,50 +27,50 @@ trait PeriodComparisonTrait
 
     /**
      * Determine if this period ends on a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period ends on a given date, otherwise FALSE.
      */
-    public function endEquals(DateTimeInterface $date): bool
+    public function endEquals(DateTime $date): bool
     {
         return $this->includedEnd->isSame($date, $this->granularity);
     }
 
     /**
      * Determine if this period ends after a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period ends after a given date, otherwise FALSE.
      */
-    public function endsAfter(DateTimeInterface $date): bool
+    public function endsAfter(DateTime $date): bool
     {
         return $this->includedEnd->isAfter($date, $this->granularity);
     }
 
     /**
      * Determine if this period ends on or after a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period ends on or after a given date, otherwise FALSE.
      */
-    public function endsAfterOrEquals(DateTimeInterface $date): bool
+    public function endsAfterOrEquals(DateTime $date): bool
     {
         return $this->includedEnd->isSameOrAfter($date, $this->granularity);
     }
 
     /**
      * Determine if this period ends before a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period ends before a given date, otherwise FALSE.
      */
-    public function endsBefore(DateTimeInterface $date): bool
+    public function endsBefore(DateTime $date): bool
     {
         return $this->includedEnd->isBefore($date, $this->granularity);
     }
 
     /**
      * Determine if this period ends on or before a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period ends on or before a given date, otherwise FALSE.
      */
-    public function endsBeforeOrEquals(DateTimeInterface $date): bool
+    public function endsBeforeOrEquals(DateTime $date): bool
     {
         return $this->includedEnd->isSameOrBefore($date, $this->granularity);
     }
@@ -91,10 +90,10 @@ trait PeriodComparisonTrait
 
     /**
      * Determine if this period includes a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period includes a given date, otherwise FALSE.
      */
-    public function includes(DateTimeInterface $date): bool
+    public function includes(DateTime $date): bool
     {
         return $this->includedStart->isSameOrBefore($date, $this->granularity) &&
             $this->includedEnd->isSameOrAfter($date, $this->granularity);
@@ -115,50 +114,50 @@ trait PeriodComparisonTrait
 
     /**
      * Determine if this period starts on a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period starts on a given date, otherwise FALSE.
      */
-    public function startEquals(DateTimeInterface $date): bool
+    public function startEquals(DateTime $date): bool
     {
         return $this->includedStart->isSame($date, $this->granularity);
     }
 
     /**
      * Determine if this period starts after a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period starts after a given date, otherwise FALSE.
      */
-    public function startsAfter(DateTimeInterface $date): bool
+    public function startsAfter(DateTime $date): bool
     {
         return $this->includedStart->isAfter($date, $this->granularity);
     }
 
     /**
      * Determine if this period starts on or after a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period starts on or after a given date, otherwise FALSE.
      */
-    public function startsAfterOrEquals(DateTimeInterface $date): bool
+    public function startsAfterOrEquals(DateTime $date): bool
     {
         return  $this->includedStart->isSameOrAfter($date, $this->granularity);
     }
 
     /**
      * Determine if this period starts before a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period starts before a given date, otherwise FALSE.
      */
-    public function startsBefore(DateTimeInterface $date): bool
+    public function startsBefore(DateTime $date): bool
     {
         return $this->includedStart->isBefore($date, $this->granularity);
     }
 
     /**
      * Determine if this period starts on or before a given date.
-     * @param DateTimeInterface $date The DateTime to compare against.
+     * @param DateTime $date The DateTime to compare against.
      * @return bool TRUE if the period starts on or before a given date, otherwise FALSE.
      */
-    public function startsBeforeOrEquals(DateTimeInterface $date): bool
+    public function startsBeforeOrEquals(DateTime $date): bool
     {
         return $this->includedStart->isSameOrBefore($date, $this->granularity);
     }

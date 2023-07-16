@@ -3,41 +3,38 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\DateTime\DateTime,
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\Period\Period,
-    InvalidArgumentException,
-    PHPUnit\Framework\TestCase,
-    RuntimeException;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 final class PeriodTest extends TestCase
 {
 
-    use
-        ContainsTest,
-        DiffSymmetricTest,
-        EndEqualsTest,
-        EndsAfterTest,
-        EndsAfterOrEqualsTest,
-        EndsBeforeTest,
-        EndsBeforeOrEqualsTest,
-        EqualsTest,
-        GapTest,
-        IncludesTest,
-        OverlapTest,
-        OverlapAllTest,
-        OverlapAnyTest,
-        OverlapsWithTest,
-        RenewTest,
-        StartEqualsTest,
-        StartsAfterTest,
-        StartsAfterOrEqualsTest,
-        StartsBeforeTest,
-        StartsBeforeOrEqualsTest,
-        SubtractTest,
-        SubtractAllTest,
-        TouchesTest;
+    use ContainsTestTrait;
+    use DiffSymmetricTestTrait;
+    use EndEqualsTestTrait;
+    use EndsAfterTestTrait;
+    use EndsAfterOrEqualsTestTrait;
+    use EndsBeforeTestTrait;
+    use EndsBeforeOrEqualsTestTrait;
+    use EqualsTestTrait;
+    use GapTestTrait;
+    use IncludesTestTrait;
+    use OverlapTestTrait;
+    use OverlapAllTestTrait;
+    use OverlapAnyTestTrait;
+    use OverlapsWithTestTrait;
+    use RenewTestTrait;
+    use StartEqualsTestTrait;
+    use StartsAfterTestTrait;
+    use StartsAfterOrEqualsTestTrait;
+    use StartsBeforeTestTrait;
+    use StartsBeforeOrEqualsTestTrait;
+    use SubtractTestTrait;
+    use SubtractAllTestTrait;
+    use TouchesTestTrait;
 
     public function testConstructor(): void
     {
@@ -47,12 +44,12 @@ final class PeriodTest extends TestCase
         $end = $period->end();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $start
         );
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $end
         );
     }
@@ -68,41 +65,12 @@ final class PeriodTest extends TestCase
         $periodEnd = $period->end();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $periodStart
         );
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
-            $periodEnd
-        );
-
-        $this->assertTrue(
-            $start->isSame($periodStart)
-        );
-
-        $this->assertTrue(
-            $end->isSame($periodEnd)
-        );
-    }
-
-    public function testConstructorDateTimeImmutable(): void
-    {
-        $start = new DateTimeImmutable('2022-01-01');
-        $end = new DateTimeImmutable('2022-01-10');
-
-        $period = new Period($start, $end);
-
-        $periodStart = $period->start();
-        $periodEnd = $period->end();
-
-        $this->assertInstanceOf(
-            DateTimeImmutable::class,
-            $periodStart
-        );
-
-        $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $periodEnd
         );
 
@@ -173,7 +141,7 @@ final class PeriodTest extends TestCase
         $end = (new Period('2022-01-01', '2022-01-10'))->end();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $end
         );
 
@@ -188,7 +156,7 @@ final class PeriodTest extends TestCase
         $end = (new Period('2022-01-01', '2022-01-10'))->end();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $end
         );
 
@@ -211,7 +179,7 @@ final class PeriodTest extends TestCase
         $includedEnd = (new Period('2022-01-01', '2022-01-10'))->includedEnd();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $includedEnd
         );
 
@@ -226,7 +194,7 @@ final class PeriodTest extends TestCase
         $includedEnd = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'end']))->includedEnd();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $includedEnd
         );
 
@@ -241,7 +209,7 @@ final class PeriodTest extends TestCase
         $includedStart = (new Period('2022-01-01', '2022-01-10'))->includedStart();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $includedStart
         );
 
@@ -256,7 +224,7 @@ final class PeriodTest extends TestCase
         $includedStart = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->includedStart();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $includedStart
         );
 
@@ -299,7 +267,7 @@ final class PeriodTest extends TestCase
         $start = (new Period('2022-01-01', '2022-01-10'))->start();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $start
         );
 
@@ -314,7 +282,7 @@ final class PeriodTest extends TestCase
         $start = (new Period('2022-01-01', '2022-01-10', ['excludeBoundaries' => 'start']))->start();
 
         $this->assertInstanceOf(
-            DateTimeImmutable::class,
+            DateTime::class,
             $start
         );
 
@@ -331,7 +299,7 @@ final class PeriodTest extends TestCase
         $dates = [];
         foreach ($period AS $date) {
             $this->assertInstanceOf(
-                DateTimeImmutable::class,
+                DateTime::class,
                 $date
             );
     
@@ -377,7 +345,7 @@ final class PeriodTest extends TestCase
         $dates = [];
         foreach ($period AS $date) {
             $this->assertInstanceOf(
-                DateTimeImmutable::class,
+                DateTime::class,
                 $date
             );
     

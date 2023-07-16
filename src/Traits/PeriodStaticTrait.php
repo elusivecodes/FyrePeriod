@@ -3,15 +3,11 @@ declare(strict_types=1);
 
 namespace Fyre\Period\Traits;
 
-use
-    Fyre\DateTime\DateTime,
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\DateTime\DateTimeInterface,
-    Fyre\Period\Period,
-    RuntimeException;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
+use RuntimeException;
 
-use function
-    is_string;
+use function is_string;
 
 /**
  * PeriodStaticTrait
@@ -58,21 +54,17 @@ trait PeriodStaticTrait
     }
 
     /**
-     * Create a DateTimeImmutable.
-     * @param DateTimeInterface|string $date The input date.
-     * @return DateTimeImmutable The DateTimeImmutable.
+     * Create a DateTime.
+     * @param DateTime|string $date The input date.
+     * @return DateTime The DateTime.
      */
-    protected static function createImmutableDate(DateTimeInterface|string $date): DateTimeImmutable
+    protected static function createDate(DateTime|string $date): DateTime
     {
         if (is_string($date)) {
-            return new DateTimeImmutable($date);
+            return new DateTime($date);
         }
 
-        if ($date instanceof DateTimeImmtutable) {
-            return $date;
-        }
-
-        return DateTimeImmutable::fromTimestamp($date->getTimestamp(), $date->getTimeZone(), $date->getLocale());
+        return $date;
     }
 
 }

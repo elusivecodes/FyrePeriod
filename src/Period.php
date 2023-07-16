@@ -3,22 +3,19 @@ declare(strict_types=1);
 
 namespace Fyre\Period;
 
-use
-    Countable,
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\DateTime\DateTimeInterface,
-    Fyre\Period\Traits\PeriodComparisonTrait,
-    Fyre\Period\Traits\PeriodIterableTrait,
-    Fyre\Period\Traits\PeriodOperationsTrait,
-    Fyre\Period\Traits\PeriodStaticTrait,
-    InvalidArgumentException,
-    Iterator,
-    RuntimeException;
+use Countable;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Traits\PeriodComparisonTrait;
+use Fyre\Period\Traits\PeriodIterableTrait;
+use Fyre\Period\Traits\PeriodOperationsTrait;
+use Fyre\Period\Traits\PeriodStaticTrait;
+use InvalidArgumentException;
+use Iterator;
+use RuntimeException;
 
-use function
-    array_key_exists,
-    in_array,
-    strtolower;
+use function array_key_exists;
+use function in_array;
+use function strtolower;
 
 /**
  * Period
@@ -42,9 +39,9 @@ class Period implements Countable, Iterator
         'none' => [true, true]
     ];
 
-    protected DateTimeImmutable $start;
+    protected DateTime $start;
 
-    protected DateTimeImmutable $end;
+    protected DateTime $end;
 
     protected string|null $granularity;
 
@@ -60,16 +57,16 @@ class Period implements Countable, Iterator
 
     /**
      * New Period constructor.
-     * @param DateTimeInterface|null $start The start date.
-     * @param DateTimeInterface|null $end The end date.
+     * @param DateTime|null $start The start date.
+     * @param DateTime|null $end The end date.
      * @param array $options The Period options.
      * @throws InvalidArgumentException if the granularity or boundaries are not valid.
      * @throws RuntimeException If the end date is before the start date.
      */
-    public function __construct(DateTimeInterface|string $start, DateTimeInterface|string $end, array $options = [])
+    public function __construct(DateTime|string $start, DateTime|string $end, array $options = [])
     {
-        $this->start = static::createImmutableDate($start);
-        $this->end = static::createImmutableDate($end);
+        $this->start = static::createDate($start);
+        $this->end = static::createDate($end);
 
         $granularity = strtolower($options['granularity'] ?? 'day');
         $excludeBoundaries = strtolower($options['excludeBoundaries'] ?? 'none');
@@ -112,9 +109,9 @@ class Period implements Countable, Iterator
 
     /**
      * Get the end date.
-     * @return DateTimeImmutable The end date
+     * @return DateTime The end date
      */
-    public function end(): DateTimeImmutable
+    public function end(): DateTime
     {
         return $this->end;
     }
@@ -130,18 +127,18 @@ class Period implements Countable, Iterator
 
     /**
      * Get the included end date.
-     * @return DateTimeImmutable The included end date
+     * @return DateTime The included end date
      */
-    public function includedEnd(): DateTimeImmutable
+    public function includedEnd(): DateTime
     {
         return $this->includedEnd;
     }
 
     /**
      * Get the included start date.
-     * @return DateTimeImmutable The included start date
+     * @return DateTime The included start date
      */
-    public function includedStart(): DateTimeImmutable
+    public function includedStart(): DateTime
     {
         return $this->includedStart;
     }
@@ -166,9 +163,9 @@ class Period implements Countable, Iterator
 
     /**
      * Get the start date.
-     * @return DateTimeImmutable The start date
+     * @return DateTime The start date
      */
-    public function start(): DateTimeImmutable
+    public function start(): DateTime
     {
         return $this->start;
     }

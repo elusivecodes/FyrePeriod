@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\Period\Period;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
 
-trait StartEqualsTest
+trait StartEqualsTestTrait
 {
 
     public function testStartEquals(): void
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startEquals(new DateTimeImmutable('2022-01-01'))
+                ->startEquals(new DateTime('2022-01-01'))
         );
     }
 
@@ -22,7 +21,7 @@ trait StartEqualsTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startEquals(new DateTimeImmutable('2021-12-31'))
+                ->startEquals(new DateTime('2021-12-31'))
         );
     }
 
@@ -30,7 +29,7 @@ trait StartEqualsTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->startEquals(new DateTimeImmutable('2022-01-02'))
+                ->startEquals(new DateTime('2022-01-02'))
         );
     }
 
@@ -38,7 +37,7 @@ trait StartEqualsTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startEquals(new DateTimeImmutable('2021-12-31'))
+                ->startEquals(new DateTime('2021-12-31'))
         );
     }
 
@@ -46,7 +45,7 @@ trait StartEqualsTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->startEquals(new DateTimeImmutable('2022-01-01'))
+                ->startEquals(new DateTime('2022-01-01'))
         );
     }
 

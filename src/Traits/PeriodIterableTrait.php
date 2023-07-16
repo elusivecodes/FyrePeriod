@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Fyre\Period\Traits;
 
-use
-    Fyre\DateTime\DateTimeImmutable;
+use Fyre\DateTime\DateTime;
 
 /**
  * PeriodIterableTrait
@@ -25,9 +24,9 @@ trait PeriodIterableTrait
 
     /**
      * Get the date at the current index.
-     * @return DateTimeImmutable The date at the current index.
+     * @return DateTime The date at the current index.
      */
-    public function current(): DateTimeImmutable
+    public function current(): DateTime
     {
         return $this->includedStart->add($this->index, $this->granularity);
     }

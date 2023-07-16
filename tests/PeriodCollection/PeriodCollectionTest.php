@@ -3,20 +3,18 @@ declare(strict_types=1);
 
 namespace Tests\PeriodCollection;
 
-use
-    Fyre\Period\Period,
-    Fyre\Period\PeriodCollection,
-    PHPUnit\Framework\TestCase;
+use Fyre\Period\Period;
+use Fyre\Period\PeriodCollection;
+use PHPUnit\Framework\TestCase;
 
 final class PeriodCollectionTest extends TestCase
 {
 
-    use
-        BoundariesTest,
-        GapsTest,
-        IntersectTest,
-        OverlapAllTest,
-        SubtractTest;
+    use BoundariesTestTrait;
+    use GapsTestTrait;
+    use IntersectTestTrait;
+    use OverlapAllTestTrait;
+    use SubtractTestTrait;
 
     public function testAdd(): void
     {

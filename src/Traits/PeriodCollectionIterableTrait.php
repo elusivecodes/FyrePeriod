@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Fyre\Period\Traits;
 
-use
-    Fyre\Period\Period;
+use Fyre\Period\Period;
 
-use function
-    array_key_exists,
-    count;
+use function array_key_exists;
+use function count;
 
 /**
  * PeriodCollectionIterableTrait

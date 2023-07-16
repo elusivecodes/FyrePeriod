@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\Period\Period;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
 
-trait IncludesTest
+trait IncludesTestTrait
 {
 
     public function testIncludesStart(): void
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2022-01-01'))
+                ->includes(new DateTime('2022-01-01'))
         );
     }
 
@@ -22,7 +21,7 @@ trait IncludesTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2021-12-31'))
+                ->includes(new DateTime('2021-12-31'))
         );
     }
 
@@ -30,7 +29,7 @@ trait IncludesTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->includes(new DateTimeImmutable('2022-01-01'))
+                ->includes(new DateTime('2022-01-01'))
         );
     }
 
@@ -38,7 +37,7 @@ trait IncludesTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2022-01-02'))
+                ->includes(new DateTime('2022-01-02'))
         );
     }
 
@@ -47,7 +46,7 @@ trait IncludesTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->includes(new DateTimeImmutable('2022-01-02'))
+                ->includes(new DateTime('2022-01-02'))
         );
     }
 
@@ -55,7 +54,7 @@ trait IncludesTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2022-01-15'))
+                ->includes(new DateTime('2022-01-15'))
         );
     }
 
@@ -63,7 +62,7 @@ trait IncludesTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2022-01-14'))
+                ->includes(new DateTime('2022-01-14'))
         );
     }
 
@@ -71,7 +70,7 @@ trait IncludesTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
-                ->includes(new DateTimeImmutable('2022-01-14'))
+                ->includes(new DateTime('2022-01-14'))
         );
     }
 
@@ -79,7 +78,7 @@ trait IncludesTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTimeImmutable('2022-01-16'))
+                ->includes(new DateTime('2022-01-16'))
         );
     }
 
@@ -87,7 +86,7 @@ trait IncludesTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
-                ->includes(new DateTimeImmutable('2022-01-15'))
+                ->includes(new DateTime('2022-01-15'))
         );
     }
 

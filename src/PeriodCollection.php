@@ -3,20 +3,17 @@ declare(strict_types=1);
 
 namespace Fyre\Period;
 
-use
-    ArrayAccess,
-    Countable,
-    Fyre\Period\Traits\PeriodCollectionIterableTrait,
-    Fyre\Period\Traits\PeriodCollectionOperationsTrait,
-    Iterator;
+use ArrayAccess;
+use Countable;
+use Fyre\Period\Traits\PeriodCollectionIterableTrait;
+use Fyre\Period\Traits\PeriodCollectionOperationsTrait;
+use Iterator;
 
-use const
-    ARRAY_FILTER_USE_BOTH;
+use const ARRAY_FILTER_USE_BOTH;
 
-use function
-    array_filter,
-    array_slice,
-    usort;
+use function array_filter;
+use function array_slice;
+use function usort;
 
 /**
  * PeriodCollection

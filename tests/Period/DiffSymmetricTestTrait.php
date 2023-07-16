@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\Period\Period,
-    Fyre\Period\PeriodCollection,
-    RuntimeException;
+use Fyre\Period\Period;
+use Fyre\Period\PeriodCollection;
+use RuntimeException;
 
-trait DiffSymmetricTest
+trait DiffSymmetricTestTrait
 {
 
     public function testDiffSymmetric(): void

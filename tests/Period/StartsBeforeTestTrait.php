@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\Period\Period;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
 
-trait StartsBeforeTest
+trait StartsBeforeTestTrait
 {
 
     public function testStartsBefore(): void
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startsBefore(new DateTimeImmutable('2022-01-01'))
+                ->startsBefore(new DateTime('2022-01-01'))
         );
     }
 
@@ -22,7 +21,7 @@ trait StartsBeforeTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startsBefore(new DateTimeImmutable('2021-12-31'))
+                ->startsBefore(new DateTime('2021-12-31'))
         );
     }
 
@@ -30,7 +29,7 @@ trait StartsBeforeTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->startsBefore(new DateTimeImmutable('2021-12-31'))
+                ->startsBefore(new DateTime('2021-12-31'))
         );
     }
 
@@ -38,7 +37,7 @@ trait StartsBeforeTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->startsBefore(new DateTimeImmutable('2022-01-02'))
+                ->startsBefore(new DateTime('2022-01-02'))
         );
     }
 
@@ -46,7 +45,7 @@ trait StartsBeforeTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'start']))
-                ->startsBefore(new DateTimeImmutable('2022-01-01'))
+                ->startsBefore(new DateTime('2022-01-01'))
         );
     }
 

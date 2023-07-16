@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\Period\Period,
-    RuntimeException;
+use Fyre\Period\Period;
+use RuntimeException;
 
-trait OverlapAllTest
+trait OverlapAllTestTrait
 {
 
     public function testOverlapAll(): void

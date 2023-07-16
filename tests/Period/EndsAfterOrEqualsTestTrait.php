@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Tests\Period;
 
-use
-    Fyre\DateTime\DateTimeImmutable,
-    Fyre\Period\Period;
+use Fyre\DateTime\DateTime;
+use Fyre\Period\Period;
 
-trait EndsAfterOrEqualsTest
+trait EndsAfterOrEqualsTestTrait
 {
 
     public function testEndsAfterOrEquals(): void
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->endsAfterOrEquals(new DateTimeImmutable('2022-01-15'))
+                ->endsAfterOrEquals(new DateTime('2022-01-15'))
         );
     }
 
@@ -22,7 +21,7 @@ trait EndsAfterOrEqualsTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
-                ->endsAfterOrEquals(new DateTimeImmutable('2022-01-14'))
+                ->endsAfterOrEquals(new DateTime('2022-01-14'))
         );
     }
 
@@ -30,7 +29,7 @@ trait EndsAfterOrEqualsTest
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
-                ->endsAfterOrEquals(new DateTimeImmutable('2022-01-14'))
+                ->endsAfterOrEquals(new DateTime('2022-01-14'))
         );
     }
 
@@ -38,7 +37,7 @@ trait EndsAfterOrEqualsTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->endsAfterOrEquals(new DateTimeImmutable('2022-01-16'))
+                ->endsAfterOrEquals(new DateTime('2022-01-16'))
         );
     }
 
@@ -46,7 +45,7 @@ trait EndsAfterOrEqualsTest
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15', ['excludeBoundaries' => 'end']))
-                ->endsAfterOrEquals(new DateTimeImmutable('2022-01-15'))
+                ->endsAfterOrEquals(new DateTime('2022-01-15'))
         );
     }
 
