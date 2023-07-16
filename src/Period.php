@@ -49,11 +49,10 @@ class Period implements Countable, Iterator
 
     protected bool $includesEnd;
 
-    use
-        PeriodComparisonTrait,
-        PeriodIterableTrait,
-        PeriodOperationsTrait,
-        PeriodStaticTrait;
+    use PeriodComparisonTrait;
+    use PeriodIterableTrait;
+    use PeriodOperationsTrait;
+    use PeriodStaticTrait;
 
     /**
      * New Period constructor.

@@ -23,9 +23,8 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     protected array $periods = [];
 
-    use
-        PeriodCollectionIterableTrait,
-        PeriodCollectionOperationsTrait;
+    use PeriodCollectionIterableTrait;
+    use PeriodCollectionOperationsTrait;
 
     /**
      * New PeriodCollection constructor.
