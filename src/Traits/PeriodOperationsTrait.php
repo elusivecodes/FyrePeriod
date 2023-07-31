@@ -15,7 +15,7 @@ trait PeriodOperationsTrait
     /**
      * Get the symmetric difference between the periods.
      * @param Period $other The Period to compare against.
-     * @return PeriodCollection The symmetric difference.
+     * @return PeriodCollection A new PeriodCollection.
      */
     public function diffSymmetric(Period $other): PeriodCollection
     {
@@ -32,7 +32,7 @@ trait PeriodOperationsTrait
     /**
      * Get the gap between the periods.
      * @param Period $other The Period to compare against.
-     * @return Period|null The gap.
+     * @return Period|null A new Period.
      */
     public function gap(Period $other): static|null
     {
@@ -62,7 +62,7 @@ trait PeriodOperationsTrait
     /**
      * Get the overlap of the periods.
      * @param Period $other The Period to compare against.
-     * @return Period|null The overlap.
+     * @return Period|null A new Period.
      */
     public function overlap(Period $other): static|null
     {
@@ -89,7 +89,7 @@ trait PeriodOperationsTrait
     /**
      * Get the overlap of all the periods.
      * @param Period ...$others The periods to compare against.
-     * @return Period|null The overlap.
+     * @return Period|null A new Period.
      */
     public function overlapAll(Period ...$others): static|null
     {
@@ -114,7 +114,7 @@ trait PeriodOperationsTrait
     /**
      * Get the overlaps of any of the periods.
      * @param Period ...$others The periods to compare against.
-     * @return PeriodCollection|null The overlaps.
+     * @return PeriodCollection|null A new PeriodCollection.
      */
     public function overlapAny(Period ...$others): PeriodCollection
     {
@@ -135,7 +135,7 @@ trait PeriodOperationsTrait
 
     /**
      * Create a new period with the same length after this period.
-     * @return Period The next Period.
+     * @return Period A new Period.
      */
     public function renew(): static
     {
@@ -152,7 +152,7 @@ trait PeriodOperationsTrait
     /**
      * Get the inverse overlap of the periods.
      * @param Period $other The period to remove.
-     * @return PeriodCollection The inverse overlap.
+     * @return PeriodCollection A new PeriodCollection.
      */
     public function subtract(Period $other): PeriodCollection
     {
@@ -188,7 +188,7 @@ trait PeriodOperationsTrait
     /**
      * Get the inverse overlap of all periods.
      * @param Period ...$others The periods to compare against.
-     * @return PeriodCollection The inverse overlap.
+     * @return PeriodCollection A new PeriodCollection.
      */
     public function subtractAll(Period ...$others): PeriodCollection
     {

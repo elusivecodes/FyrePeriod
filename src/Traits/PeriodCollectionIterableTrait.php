@@ -27,7 +27,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Get the Period at the current index.
-     * @return array|null The Period at the current index.
+     * @return Period The Period at the current index.
      */
     public function current(): Period
     {
