@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tests\Period;
 
 use Fyre\Period\Period;
-use RuntimeException;
 
 trait RenewTestTrait
 {
