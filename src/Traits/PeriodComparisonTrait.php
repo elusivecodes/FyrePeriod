@@ -167,7 +167,7 @@ trait PeriodComparisonTrait
      * @param Period $other The Period to compare against.
      * @return bool TRUE if the period touches the other Period, otherwise FALSE.
      */
-    public function touches(Period $other)
+    public function touches(Period $other): bool
     {
         static::checkGranularity($this, $other);
 
