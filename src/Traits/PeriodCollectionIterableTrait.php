@@ -68,7 +68,7 @@ trait PeriodCollectionIterableTrait
      * @param mixed $index The index.
      * @param mixed $value The Period.
      */
-    public function offsetSet(mixed $index = null, mixed $value): void
+    public function offsetSet(mixed $index, mixed $value): void
     {
         if ($index === null) {
             $this->periods[] = $value;

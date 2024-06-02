@@ -43,6 +43,10 @@ class Period implements Countable, Iterator
 
     protected DateTime $end;
 
+    protected DateTime $includedStart;
+
+    protected DateTime $includedEnd;
+
     protected string|null $granularity;
 
     protected bool $includesStart;
@@ -87,13 +91,13 @@ class Period implements Countable, Iterator
 
         $this->includedStart = $this->includesStart ?
             $this->start :
-            $this->start->add(1, $this->granularity);
+            static::add($this->start, 1, $this->granularity);
 
         $this->includedEnd = $this->includesEnd ?
             $this->end :
-            $this->end->sub(1, $this->granularity);
+            static::sub($this->end, 1, $this->granularity);
 
-        if ($this->includedEnd->isBefore($this->includedStart, $this->granularity)) {
+        if (static::isBefore($this->includedEnd, $this->includedStart, $this->granularity)) {
             throw new RuntimeException('The end date must be after the start date');
         }
     }
@@ -104,7 +108,7 @@ class Period implements Countable, Iterator
      */
     public function length(): int
     {
-        return $this->includedEnd->diff($this->includedStart, $this->granularity);
+        return static::diff($this->includedEnd, $this->includedStart, $this->granularity);
     }
 
     /**

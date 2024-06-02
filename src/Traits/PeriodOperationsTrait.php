@@ -139,11 +139,11 @@ trait PeriodOperationsTrait
      */
     public function renew(): static
     {
-        $diff = $this->end->diff($this->start, $this->granularity);
+        $diff = static::diff($this->end, $this->start, $this->granularity);
 
         return new static(
             $this->end,
-            $this->end->add($diff, $this->granularity),
+            static::add($this->end, $diff, $this->granularity),
             $this->granularity,
             static::getBoundaries($this->includesStart, $this->includesEnd)
         );

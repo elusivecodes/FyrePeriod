@@ -21,8 +21,8 @@ trait PeriodComparisonTrait
     {
         static::checkGranularity($this, $other);
 
-        return $this->includedStart->isSameOrBefore($other->includedStart(), $this->granularity) &&
-            $this->includedEnd->isSameOrAfter($other->includedEnd(), $this->granularity);
+        return static::isSameOrBefore($this->includedStart, $other->includedStart(), $this->granularity) &&
+            static::isSameOrAfter($this->includedEnd, $other->includedEnd(), $this->granularity);
     }
 
     /**
@@ -32,7 +32,7 @@ trait PeriodComparisonTrait
      */
     public function endEquals(DateTime $date): bool
     {
-        return $this->includedEnd->isSame($date, $this->granularity);
+        return static::isSame($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -42,7 +42,7 @@ trait PeriodComparisonTrait
      */
     public function endsAfter(DateTime $date): bool
     {
-        return $this->includedEnd->isAfter($date, $this->granularity);
+        return static::isAfter($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -52,7 +52,7 @@ trait PeriodComparisonTrait
      */
     public function endsAfterOrEquals(DateTime $date): bool
     {
-        return $this->includedEnd->isSameOrAfter($date, $this->granularity);
+        return static::isSameOrAfter($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -62,7 +62,7 @@ trait PeriodComparisonTrait
      */
     public function endsBefore(DateTime $date): bool
     {
-        return $this->includedEnd->isBefore($date, $this->granularity);
+        return static::isBefore($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -72,7 +72,7 @@ trait PeriodComparisonTrait
      */
     public function endsBeforeOrEquals(DateTime $date): bool
     {
-        return $this->includedEnd->isSameOrBefore($date, $this->granularity);
+        return static::isSameOrBefore($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -84,8 +84,8 @@ trait PeriodComparisonTrait
     {
         static::checkGranularity($this, $other);
 
-        return $this->includedStart->isSame($other->includedStart(), $this->granularity) &&
-            $this->includedEnd->isSame($other->includedEnd(), $this->granularity);
+        return static::isSame($this->includedStart, $other->includedStart(), $this->granularity) &&
+            static::isSame($this->includedEnd, $other->includedEnd(), $this->granularity);
     }
 
     /**
@@ -95,8 +95,8 @@ trait PeriodComparisonTrait
      */
     public function includes(DateTime $date): bool
     {
-        return $this->includedStart->isSameOrBefore($date, $this->granularity) &&
-            $this->includedEnd->isSameOrAfter($date, $this->granularity);
+        return static::isSameOrBefore($this->includedStart, $date, $this->granularity) &&
+            static::isSameOrAfter($this->includedEnd, $date, $this->granularity);
     }
 
     /**
@@ -108,8 +108,8 @@ trait PeriodComparisonTrait
     {
         static::checkGranularity($this, $other);
 
-        return $this->includedStart->isSameOrBefore($other->includedEnd(), $this->granularity) &&
-            $this->includedEnd->isSameOrAfter($other->includedStart(), $this->granularity);
+        return static::isSameOrBefore($this->includedStart, $other->includedEnd(), $this->granularity) &&
+            static::isSameOrAfter($this->includedEnd, $other->includedStart(), $this->granularity);
     }
 
     /**
@@ -119,7 +119,7 @@ trait PeriodComparisonTrait
      */
     public function startEquals(DateTime $date): bool
     {
-        return $this->includedStart->isSame($date, $this->granularity);
+        return static::isSame($this->includedStart, $date, $this->granularity);
     }
 
     /**
@@ -129,7 +129,7 @@ trait PeriodComparisonTrait
      */
     public function startsAfter(DateTime $date): bool
     {
-        return $this->includedStart->isAfter($date, $this->granularity);
+        return static::isAfter($this->includedStart, $date, $this->granularity);
     }
 
     /**
@@ -139,7 +139,7 @@ trait PeriodComparisonTrait
      */
     public function startsAfterOrEquals(DateTime $date): bool
     {
-        return  $this->includedStart->isSameOrAfter($date, $this->granularity);
+        return static::isSameOrAfter($this->includedStart, $date, $this->granularity);
     }
 
     /**
@@ -149,7 +149,7 @@ trait PeriodComparisonTrait
      */
     public function startsBefore(DateTime $date): bool
     {
-        return $this->includedStart->isBefore($date, $this->granularity);
+        return static::isBefore($this->includedStart, $date, $this->granularity);
     }
 
     /**
@@ -159,7 +159,7 @@ trait PeriodComparisonTrait
      */
     public function startsBeforeOrEquals(DateTime $date): bool
     {
-        return $this->includedStart->isSameOrBefore($date, $this->granularity);
+        return static::isSameOrBefore($this->includedStart, $date, $this->granularity);
     }
 
     /**
@@ -171,8 +171,8 @@ trait PeriodComparisonTrait
     {
         static::checkGranularity($this, $other);
 
-        return $this->includedStart->isSame($other->includedEnd(), $this->granularity) ||
-            $this->includedEnd->isSame($other->includedStart(), $this->granularity);
+        return static::isSame($this->includedStart, $other->includedEnd(), $this->granularity) ||
+            static::isSame($this->includedEnd, $other->includedStart(), $this->granularity);
     }
 
 }

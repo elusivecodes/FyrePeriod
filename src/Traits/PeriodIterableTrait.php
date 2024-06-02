@@ -19,7 +19,7 @@ trait PeriodIterableTrait
      */
     public function count(): int
     {
-        return $this->includedEnd->diff($this->includedStart, $this->granularity) + 1;
+        return static::diff($this->includedEnd, $this->includedStart, $this->granularity) + 1;
     }
 
     /**
@@ -28,7 +28,7 @@ trait PeriodIterableTrait
      */
     public function current(): DateTime
     {
-        return $this->includedStart->add($this->index, $this->granularity);
+        return static::add($this->includedStart, $this->index, $this->granularity);
     }
 
     /**
