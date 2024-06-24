@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PeriodCollectionTest extends TestCase
 {
-
     use BoundariesTestTrait;
     use GapsTestTrait;
     use IntersectTestTrait;
@@ -48,6 +47,63 @@ final class PeriodCollectionTest extends TestCase
         $this->assertCount(
             0,
             $collection2
+        );
+    }
+
+    public function testIteration(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-05', '2022-01-15');
+        $collection = new PeriodCollection($period1, $period2);
+
+        $dates = [];
+        foreach ($collection as $period) {
+            $this->assertInstanceOf(
+                Period::class,
+                $period
+            );
+
+            $dates[] = $period->start()->toIsoString();
+        }
+
+        $this->assertSame(
+            [
+                '2022-01-01T00:00:00.000+00:00',
+                '2022-01-05T00:00:00.000+00:00'
+            ],
+            $dates
+        );
+    }
+
+    public function testOffsetGet(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-05', '2022-01-15');
+        $collection = new PeriodCollection($period1, $period2);
+
+        $this->assertSame(
+            $period1,
+            $collection[0]
+        );
+
+        $this->assertSame(
+            $period2,
+            $collection[1]
+        );
+    }
+
+    public function testOffsetSet(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-05', '2022-01-15');
+        $collection = new PeriodCollection($period1, $period2);
+
+        $period3 = new Period('2022-01-10', '2022-01-20');
+        $collection[1] = $period3;
+
+        $this->assertSame(
+            $period3,
+            $collection[1]
         );
     }
 
@@ -157,62 +213,4 @@ final class PeriodCollectionTest extends TestCase
             $collection2
         );
     }
-
-    public function testIteration(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-05', '2022-01-15');
-        $collection = new PeriodCollection($period1, $period2);
-
-        $dates = [];
-        foreach ($collection AS $period) {
-            $this->assertInstanceOf(
-                Period::class,
-                $period
-            );
-
-            $dates[] = $period->start()->toIsoString();
-        }
-
-        $this->assertSame(
-            [
-                '2022-01-01T00:00:00.000+00:00',
-                '2022-01-05T00:00:00.000+00:00'
-            ],
-            $dates
-        );
-    }
-
-    public function testOffsetGet(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-05', '2022-01-15');
-        $collection = new PeriodCollection($period1, $period2);
-
-        $this->assertSame(
-            $period1,
-            $collection[0]
-        );
-
-        $this->assertSame(
-            $period2,
-            $collection[1]
-        );
-    }
-
-    public function testOffsetSet(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-05', '2022-01-15');
-        $collection = new PeriodCollection($period1, $period2);
-
-        $period3 =  new Period('2022-01-10', '2022-01-20');
-        $collection[1] = $period3;
-
-        $this->assertSame(
-            $period3,
-            $collection[1]
-        );
-    }
-
 }

@@ -8,17 +8,6 @@ use RuntimeException;
 
 trait TouchesTestTrait
 {
-
-    public function testTouchesStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-10', '2022-01-20');
-
-        $this->assertTrue(
-            $period1->touches($period2)
-        );
-    }
-
     public function testTouchesEnd(): void
     {
         $period1 = new Period('2022-01-10', '2022-01-20');
@@ -49,20 +38,20 @@ trait TouchesTestTrait
         );
     }
 
-    public function testTouchesEndBeforeExcludeStart(): void
+    public function testTouchesEndBeforeExcludeEnd(): void
     {
-        $period1 = new Period('2022-01-09', '2022-01-20', excludeBoundaries: 'start');
-        $period2 = new Period('2022-01-01', '2022-01-10');
+        $period1 = new Period('2022-01-09', '2022-01-20');
+        $period2 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end');
 
         $this->assertTrue(
             $period1->touches($period2)
         );
     }
 
-    public function testTouchesEndBeforeExcludeEnd(): void
+    public function testTouchesEndBeforeExcludeStart(): void
     {
-        $period1 = new Period('2022-01-09', '2022-01-20');
-        $period2 = new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end');
+        $period1 = new Period('2022-01-09', '2022-01-20', excludeBoundaries: 'start');
+        $period2 = new Period('2022-01-01', '2022-01-10');
 
         $this->assertTrue(
             $period1->touches($period2)
@@ -79,4 +68,13 @@ trait TouchesTestTrait
         $period1->touches($period2);
     }
 
+    public function testTouchesStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-10', '2022-01-20');
+
+        $this->assertTrue(
+            $period1->touches($period2)
+        );
+    }
 }

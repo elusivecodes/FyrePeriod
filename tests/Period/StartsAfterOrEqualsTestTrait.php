@@ -8,28 +8,11 @@ use Fyre\Period\Period;
 
 trait StartsAfterOrEqualsTestTrait
 {
-
     public function testStartsAfterOrEquals(): void
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
                 ->startsAfterOrEquals(new DateTime('2022-01-01'))
-        );
-    }
-
-    public function testStartsAfterOrEqualsBefore(): void
-    {
-        $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15'))
-                ->startsAfterOrEquals(new DateTime('2021-12-31'))
-        );
-    }
-
-    public function testStartsAfterOrEqualsBeforeExcludeStart(): void
-    {
-        $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
-                ->startsAfterOrEquals(new DateTime('2021-12-31'))
         );
     }
 
@@ -49,4 +32,19 @@ trait StartsAfterOrEqualsTestTrait
         );
     }
 
+    public function testStartsAfterOrEqualsBefore(): void
+    {
+        $this->assertTrue(
+            (new Period('2022-01-01', '2022-01-15'))
+                ->startsAfterOrEquals(new DateTime('2021-12-31'))
+        );
+    }
+
+    public function testStartsAfterOrEqualsBeforeExcludeStart(): void
+    {
+        $this->assertTrue(
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
+                ->startsAfterOrEquals(new DateTime('2021-12-31'))
+        );
+    }
 }

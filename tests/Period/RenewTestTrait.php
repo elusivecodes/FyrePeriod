@@ -7,7 +7,6 @@ use Fyre\Period\Period;
 
 trait RenewTestTrait
 {
-
     public function testRenew(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
@@ -34,9 +33,9 @@ trait RenewTestTrait
         );
     }
 
-    public function testRenewExcludeStart(): void
+    public function testRenewExcludeBoth(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'both');
         $period2 = $period1->renew();
 
         $this->assertSame(
@@ -53,7 +52,7 @@ trait RenewTestTrait
             $period2->includesStart()
         );
 
-        $this->assertTrue(
+        $this->assertFalse(
             $period2->includesEnd()
         );
     }
@@ -82,9 +81,9 @@ trait RenewTestTrait
         );
     }
 
-    public function testRenewExcludeBoth(): void
+    public function testRenewExcludeStart(): void
     {
-        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'both');
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
         $period2 = $period1->renew();
 
         $this->assertSame(
@@ -101,7 +100,7 @@ trait RenewTestTrait
             $period2->includesStart()
         );
 
-        $this->assertFalse(
+        $this->assertTrue(
             $period2->includesEnd()
         );
     }
@@ -110,7 +109,7 @@ trait RenewTestTrait
     {
         $period1 = new Period('2022-01-01', '2022-01-15', 'hour');
         $period2 = $period1->renew();
-    
+
         $this->assertSame(
             '2022-01-15T00:00:00.000+00:00',
             $period2->start()->toIsoString()
@@ -126,5 +125,4 @@ trait RenewTestTrait
             $period1->renew()->granularity()
         );
     }
-
 }

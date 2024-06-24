@@ -11,7 +11,6 @@ use Fyre\Period\Period;
  */
 trait PeriodComparisonTrait
 {
-
     /**
      * Determine if this period contains another Period.
      * @param Period $other The Period to compare against.
@@ -174,5 +173,4 @@ trait PeriodComparisonTrait
         return static::isSame($this->includedStart, $other->includedEnd(), $this->granularity) ||
             static::isSame($this->includedEnd, $other->includedStart(), $this->granularity);
     }
-
 }

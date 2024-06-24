@@ -10,7 +10,6 @@ use Fyre\DateTime\DateTime;
  */
 trait PeriodIterableTrait
 {
-
     protected int $index = 0;
 
     /**
@@ -64,5 +63,4 @@ trait PeriodIterableTrait
     {
         return $this->index < $this->count();
     }
-
 }

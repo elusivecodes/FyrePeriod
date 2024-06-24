@@ -8,15 +8,14 @@ use Fyre\Period\PeriodCollection;
 
 trait OverlapAllTestTrait
 {
-
     public function testOverlapAll(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05');
         $period2 = new Period('2022-01-10', '2022-01-15');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-08');
-        $period4 = new Period('2022-01-08','2022-01-13');
+        $period3 = new Period('2022-01-03', '2022-01-08');
+        $period4 = new Period('2022-01-08', '2022-01-13');
         $collection2 = new PeriodCollection($period3, $period4);
 
         $collection3 = $collection1->overlapAll($collection2);
@@ -68,14 +67,30 @@ trait OverlapAllTestTrait
         );
     }
 
+    public function testOverlapAllEmpty(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-05');
+        $period2 = new Period('2022-01-10', '2022-01-15');
+        $collection1 = new PeriodCollection($period1, $period2);
+
+        $collection2 = new PeriodCollection();
+
+        $collection3 = $collection1->overlapAll($collection2);
+
+        $this->assertCount(
+            0,
+            $collection3
+        );
+    }
+
     public function testOverlapAllExclude(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05', excludeBoundaries: 'both');
         $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'both');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-08', excludeBoundaries: 'both');
-        $period4 = new Period('2022-01-08','2022-01-13', excludeBoundaries: 'both');
+        $period3 = new Period('2022-01-03', '2022-01-08', excludeBoundaries: 'both');
+        $period4 = new Period('2022-01-08', '2022-01-13', excludeBoundaries: 'both');
         $collection2 = new PeriodCollection($period3, $period4);
 
         $collection3 = $collection1->overlapAll($collection2);
@@ -133,8 +148,8 @@ trait OverlapAllTestTrait
         $period2 = new Period('2022-01-10', '2022-01-15');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-08');
-        $period4 = new Period('2022-01-08','2022-01-13');
+        $period3 = new Period('2022-01-03', '2022-01-08');
+        $period4 = new Period('2022-01-08', '2022-01-13');
         $collection2 = new PeriodCollection($period3, $period4);
 
         $period5 = new Period('2022-01-04', '2022-01-20');
@@ -167,21 +182,4 @@ trait OverlapAllTestTrait
             $collection4[1]->end()->toIsoString()
         );
     }
-
-    public function testOverlapAllEmpty(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-05');
-        $period2 = new Period('2022-01-10', '2022-01-15');
-        $collection1 = new PeriodCollection($period1, $period2);
-
-        $collection2 = new PeriodCollection();
-
-        $collection3 = $collection1->overlapAll($collection2);
-
-        $this->assertCount(
-            0,
-            $collection3
-        );
-    }
-
 }

@@ -8,15 +8,14 @@ use Fyre\Period\PeriodCollection;
 
 trait SubtractTestTrait
 {
-
     public function testSubtract(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05');
         $period2 = new Period('2022-01-10', '2022-01-15');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-02','2022-01-03');
-        $period4 = new Period('2022-01-12','2022-01-13');
+        $period3 = new Period('2022-01-02', '2022-01-03');
+        $period4 = new Period('2022-01-12', '2022-01-13');
         $collection2 = new PeriodCollection($period3, $period4);
 
         $collection3 = $collection1->subtract($collection2);
@@ -87,5 +86,4 @@ trait SubtractTestTrait
             $collection3
         );
     }
-
 }

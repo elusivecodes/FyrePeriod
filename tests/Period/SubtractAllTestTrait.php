@@ -9,7 +9,6 @@ use RuntimeException;
 
 trait SubtractAllTestTrait
 {
-
     public function testSubtractAll(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-30');
@@ -58,6 +57,17 @@ trait SubtractAllTestTrait
         );
     }
 
+    public function testSubtractAllInvalidGranularity(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $period1 = new Period('2022-01-01', '2022-01-30');
+        $period2 = new Period('2022-01-05', '2022-01-10');
+        $period3 = new Period('2022-01-15', '2022-01-20', 'hour');
+
+        $period1->subtractAll($period2, $period3);
+    }
+
     public function testSubtractAllNoOverlaps(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05');
@@ -80,16 +90,4 @@ trait SubtractAllTestTrait
             $collection[0]->end()->toIsoString()
         );
     }
-
-    public function testSubtractAllInvalidGranularity(): void
-    {
-        $this->expectException(RuntimeException::class);
-
-        $period1 = new Period('2022-01-01', '2022-01-30');
-        $period2 = new Period('2022-01-05', '2022-01-10');
-        $period3 = new Period('2022-01-15', '2022-01-20', 'hour');
-
-        $period1->subtractAll($period2, $period3);
-    }
-
 }

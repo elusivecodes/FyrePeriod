@@ -9,7 +9,6 @@ use RuntimeException;
 
 trait SubtractTestTrait
 {
-
     public function testSubtract(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
@@ -29,90 +28,6 @@ trait SubtractTestTrait
         $this->assertInstanceOf(
             Period::class,
             $collection[0]
-        );
-    }
-
-    public function testSubtractStartAfter(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20');
-        $collection = $period1->subtract($period2);
-
-        $this->assertCount(
-            1,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertFalse(
-            $collection[0]->includesEnd()
-        );
-    }
-
-    public function testSubtractStartAfterExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
-        $collection = $period1->subtract($period2);
-
-        $this->assertCount(
-            1,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesEnd()
-        );
-    }
-
-    public function testSubtractStartBefore(): void
-    {
-        $period1 = new Period('2022-01-10', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-20');
-        $collection = $period1->subtract($period2);
-
-        $this->assertCount(
-            0,
-            $collection
-        );
-    }
-
-    public function testSubtractStartBeforeExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-10', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-20', excludeBoundaries: 'start');
-        $collection = $period1->subtract($period2);
-
-        $this->assertCount(
-            0,
-            $collection
         );
     }
 
@@ -272,6 +187,16 @@ trait SubtractTestTrait
         );
     }
 
+    public function testSubtractInvalidGranularity(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
+
+        $period1->subtract($period2);
+    }
+
     public function testSubtractNoOverlap(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-10');
@@ -294,14 +219,87 @@ trait SubtractTestTrait
         );
     }
 
-    public function testSubtractInvalidGranularity(): void
+    public function testSubtractStartAfter(): void
     {
-        $this->expectException(RuntimeException::class);
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2022-01-10', '2022-01-20');
+        $collection = $period1->subtract($period2);
 
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
+        $this->assertCount(
+            1,
+            $collection
+        );
 
-        $period1->subtract($period2);
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertFalse(
+            $collection[0]->includesEnd()
+        );
     }
 
+    public function testSubtractStartAfterExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
+        $collection = $period1->subtract($period2);
+
+        $this->assertCount(
+            1,
+            $collection
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesEnd()
+        );
+    }
+
+    public function testSubtractStartBefore(): void
+    {
+        $period1 = new Period('2022-01-10', '2022-01-15');
+        $period2 = new Period('2022-01-01', '2022-01-20');
+        $collection = $period1->subtract($period2);
+
+        $this->assertCount(
+            0,
+            $collection
+        );
+    }
+
+    public function testSubtractStartBeforeExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-10', '2022-01-15');
+        $period2 = new Period('2022-01-01', '2022-01-20', excludeBoundaries: 'start');
+        $collection = $period1->subtract($period2);
+
+        $this->assertCount(
+            0,
+            $collection
+        );
+    }
 }

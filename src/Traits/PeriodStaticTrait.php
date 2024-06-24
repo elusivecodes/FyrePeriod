@@ -14,26 +14,6 @@ use function is_string;
  */
 trait PeriodStaticTrait
 {
-
-    /**
-     * Add an amount of time to a date (by granularity).
-     * @param DateTime $date The DateTime.
-     * @param int $amount The amount of time to add.
-     * @param string|null $granularity The granularity.
-     * @return DateTime The new DateTime.
-     */
-    protected static function add(DateTime $date, int $amount, string|null $granularity = null): DateTime
-    {
-        return match ($granularity) {
-            'day' => $date->addDays($amount),
-            'hour' => $date->addHours($amount),
-            'minute' => $date->addMinutes($amount),
-            'month' => $date->addMonths($amount),
-            'second' => $date->addSeconds($amount),
-            'year' => $date->addYears($amount)
-        };
-    }
-
     /**
      * Get the boundary string.
      * @param bool $includesStart Whether the Period includes the start.
@@ -55,6 +35,25 @@ trait PeriodStaticTrait
         }
 
         return 'none';
+    }
+
+    /**
+     * Add an amount of time to a date (by granularity).
+     * @param DateTime $date The DateTime.
+     * @param int $amount The amount of time to add.
+     * @param string|null $granularity The granularity.
+     * @return DateTime The new DateTime.
+     */
+    protected static function add(DateTime $date, int $amount, string|null $granularity = null): DateTime
+    {
+        return match ($granularity) {
+            'day' => $date->addDays($amount),
+            'hour' => $date->addHours($amount),
+            'minute' => $date->addMinutes($amount),
+            'month' => $date->addMonths($amount),
+            'second' => $date->addSeconds($amount),
+            'year' => $date->addYears($amount)
+        };
     }
 
     /**
@@ -224,5 +223,4 @@ trait PeriodStaticTrait
             'year' => $date->subYears($amount)
         };
     }
-
 }

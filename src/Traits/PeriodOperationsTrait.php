@@ -11,7 +11,6 @@ use Fyre\Period\PeriodCollection;
  */
 trait PeriodOperationsTrait
 {
-
     /**
      * Get the symmetric difference between the periods.
      * @param Period $other The Period to compare against.
@@ -100,7 +99,7 @@ trait PeriodOperationsTrait
             static::getBoundaries($this->includesStart, $this->includesEnd)
         );
 
-        foreach ($others AS $other) {
+        foreach ($others as $other) {
             $overlap = $overlap->overlap($other);
 
             if ($overlap === null) {
@@ -120,9 +119,9 @@ trait PeriodOperationsTrait
     {
         $overlaps = [];
 
-        foreach ($others AS $other) {
+        foreach ($others as $other) {
             $overlap = $this->overlap($other);
-    
+
             if ($overlap === null) {
                 continue;
             }
@@ -194,11 +193,10 @@ trait PeriodOperationsTrait
     {
         $subtractions = [];
 
-        foreach ($others AS $other) {
+        foreach ($others as $other) {
             $subtractions[] = $this->subtract($other);
         }
 
         return (new PeriodCollection($this))->overlapAll(...$subtractions);
     }
-
 }

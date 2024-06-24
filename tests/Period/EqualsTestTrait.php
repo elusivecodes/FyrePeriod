@@ -8,51 +8,10 @@ use RuntimeException;
 
 trait EqualsTestTrait
 {
-
     public function testEquals(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
         $period2 = new Period('2022-01-01', '2022-01-15');
-
-        $this->assertTrue(
-            $period1->equals($period2)
-        );
-    }
-
-    public function testEqualsStartAfter(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-02', '2022-01-15');
-
-        $this->assertFalse(
-            $period1->equals($period2)
-        );
-    }
-
-    public function testEqualsStartAfterExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
-        $period2 = new Period('2022-01-02', '2022-01-15');
-
-        $this->assertTrue(
-            $period1->equals($period2)
-        );
-    }
-
-    public function testEqualsStartBefore(): void
-    {
-        $period1 = new Period('2022-01-02', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-15');
-
-        $this->assertFalse(
-            $period1->equals($period2)
-        );
-    }
-
-    public function testEqualsStartBeforeExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-02', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
 
         $this->assertTrue(
             $period1->equals($period2)
@@ -109,4 +68,43 @@ trait EqualsTestTrait
         $period1->equals($period2);
     }
 
+    public function testEqualsStartAfter(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2022-01-02', '2022-01-15');
+
+        $this->assertFalse(
+            $period1->equals($period2)
+        );
+    }
+
+    public function testEqualsStartAfterExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
+        $period2 = new Period('2022-01-02', '2022-01-15');
+
+        $this->assertTrue(
+            $period1->equals($period2)
+        );
+    }
+
+    public function testEqualsStartBefore(): void
+    {
+        $period1 = new Period('2022-01-02', '2022-01-15');
+        $period2 = new Period('2022-01-01', '2022-01-15');
+
+        $this->assertFalse(
+            $period1->equals($period2)
+        );
+    }
+
+    public function testEqualsStartBeforeExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-02', '2022-01-15');
+        $period2 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
+
+        $this->assertTrue(
+            $period1->equals($period2)
+        );
+    }
 }

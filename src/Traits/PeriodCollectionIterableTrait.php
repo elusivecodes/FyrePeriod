@@ -13,7 +13,6 @@ use function count;
  */
 trait PeriodCollectionIterableTrait
 {
-
     protected int $index = 0;
 
     /**
@@ -41,6 +40,14 @@ trait PeriodCollectionIterableTrait
     public function key(): int
     {
         return $this->index;
+    }
+
+    /**
+     * Progress the index.
+     */
+    public function next(): void
+    {
+        $this->index++;
     }
 
     /**
@@ -87,14 +94,6 @@ trait PeriodCollectionIterableTrait
     }
 
     /**
-     * Progress the index.
-     */
-    public function next(): void
-    {
-        $this->index++;
-    }
-
-    /**
      * Reset the index.
      */
     public function rewind(): void
@@ -110,5 +109,4 @@ trait PeriodCollectionIterableTrait
     {
         return array_key_exists($this->index, $this->periods);
     }
-
 }

@@ -8,7 +8,6 @@ use Fyre\Period\PeriodCollection;
 
 trait BoundariesTestTrait
 {
-
     public function testBoundaries(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-10');
@@ -121,5 +120,4 @@ trait BoundariesTestTrait
             (new PeriodCollection())->boundaries()
         );
     }
-
 }

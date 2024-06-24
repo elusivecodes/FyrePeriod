@@ -9,22 +9,21 @@ use Fyre\Period\Traits\PeriodCollectionIterableTrait;
 use Fyre\Period\Traits\PeriodCollectionOperationsTrait;
 use Iterator;
 
-use const ARRAY_FILTER_USE_BOTH;
-
 use function array_filter;
 use function array_slice;
 use function usort;
+
+use const ARRAY_FILTER_USE_BOTH;
 
 /**
  * PeriodCollection
  */
 class PeriodCollection implements ArrayAccess, Countable, Iterator
 {
-
-    protected array $periods = [];
-
     use PeriodCollectionIterableTrait;
     use PeriodCollectionOperationsTrait;
+
+    protected array $periods = [];
 
     /**
      * New PeriodCollection constructor.
@@ -57,7 +56,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
         $firstPeriod = $this->periods[0];
         $lastPeriod = $this->periods[0];
-        foreach ($this AS $period) {
+        foreach ($this as $period) {
             if (!$firstPeriod || $period->includedStart()->isBefore($firstPeriod->includedStart())) {
                 $firstPeriod = $period;
             }
@@ -96,11 +95,10 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
     {
         $periods = array_filter(
             $this->periods,
-            function(Period $period, int $index): bool
-            {
+            function(Period $period, int $index): bool {
                 $others = array_slice($this->periods, 0, $index);
 
-                foreach ($others AS $other) {
+                foreach ($others as $other) {
                     if ($period->equals($other)) {
                         return false;
                     }
@@ -113,5 +111,4 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
         return new static(...$periods);
     }
-
 }

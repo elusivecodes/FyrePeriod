@@ -22,6 +22,17 @@ use function strtolower;
  */
 class Period implements Countable, Iterator
 {
+    use PeriodComparisonTrait;
+    use PeriodIterableTrait;
+    use PeriodOperationsTrait;
+    use PeriodStaticTrait;
+
+    protected const BOUNDARIES = [
+        'both' => [false, false],
+        'start' => [false, true],
+        'end' => [true, false],
+        'none' => [true, true]
+    ];
 
     protected const GRANULARITIES = [
         'year',
@@ -32,31 +43,13 @@ class Period implements Countable, Iterator
         'second'
     ];
 
-    protected const BOUNDARIES = [
-        'both' => [false, false],
-        'start' => [false, true],
-        'end' => [true, false],
-        'none' => [true, true]
-    ];
-
-    protected DateTime $start;
-
     protected DateTime $end;
-
-    protected DateTime $includedStart;
-
-    protected DateTime $includedEnd;
-
     protected string|null $granularity;
-
-    protected bool $includesStart;
-
+    protected DateTime $includedEnd;
+    protected DateTime $includedStart;
     protected bool $includesEnd;
-
-    use PeriodComparisonTrait;
-    use PeriodIterableTrait;
-    use PeriodOperationsTrait;
-    use PeriodStaticTrait;
+    protected bool $includesStart;
+    protected DateTime $start;
 
     /**
      * New Period constructor.
@@ -100,15 +93,6 @@ class Period implements Countable, Iterator
         if (static::isBefore($this->includedEnd, $this->includedStart, $this->granularity)) {
             throw new RuntimeException('The end date must be after the start date');
         }
-    }
-
-    /**
-     * Get the length of the period.
-     * @return int The length of the period.
-     */
-    public function length(): int
-    {
-        return static::diff($this->includedEnd, $this->includedStart, $this->granularity);
     }
 
     /**
@@ -166,6 +150,15 @@ class Period implements Countable, Iterator
     }
 
     /**
+     * Get the length of the period.
+     * @return int The length of the period.
+     */
+    public function length(): int
+    {
+        return static::diff($this->includedEnd, $this->includedStart, $this->granularity);
+    }
+
+    /**
      * Get the start date.
      * @return DateTime The start date
      */
@@ -173,5 +166,4 @@ class Period implements Countable, Iterator
     {
         return $this->start;
     }
-
 }

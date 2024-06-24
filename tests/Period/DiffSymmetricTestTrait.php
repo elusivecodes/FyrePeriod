@@ -9,7 +9,6 @@ use RuntimeException;
 
 trait DiffSymmetricTestTrait
 {
-
     public function testDiffSymmetric(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
@@ -34,198 +33,6 @@ trait DiffSymmetricTestTrait
         $this->assertInstanceOf(
             Period::class,
             $collection[1]
-        );
-    }
-
-    public function testDiffSymmetricStartAfter(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20');
-        $collection = $period1->diffSymmetric($period2);
-
-        $this->assertCount(
-            2,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-15T00:00:00.000+00:00',
-            $collection[1]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-20T00:00:00.000+00:00',
-            $collection[1]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertFalse(
-            $collection[0]->includesEnd()
-        );
-
-        $this->assertFalse(
-            $collection[1]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[1]->includesEnd()
-        );
-    }
-
-    public function testDiffSymmetricStartAfterExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
-        $collection = $period1->diffSymmetric($period2);
-
-        $this->assertCount(
-            2,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-15T00:00:00.000+00:00',
-            $collection[1]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-20T00:00:00.000+00:00',
-            $collection[1]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesEnd()
-        );
-
-        $this->assertFalse(
-            $collection[1]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[1]->includesEnd()
-        );
-    }
-
-    public function testDiffSymmetricStartBefore(): void
-    {
-        $period1 = new Period('2022-01-10', '2022-01-15');
-        $period2 = new Period('2022-01-01', '2022-01-20');
-        $collection = $period1->diffSymmetric($period2);
-
-        $this->assertCount(
-            2,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-15T00:00:00.000+00:00',
-            $collection[1]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-20T00:00:00.000+00:00',
-            $collection[1]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertFalse(
-            $collection[0]->includesEnd()
-        );
-
-        $this->assertFalse(
-            $collection[1]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[1]->includesEnd()
-        );
-    }
-
-    public function testDiffSymmetricStartBeforeExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'start');
-        $period2 = new Period('2022-01-01', '2022-01-20');
-        $collection = $period1->diffSymmetric($period2);
-
-        $this->assertCount(
-            2,
-            $collection
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $collection[0]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $collection[0]->end()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-15T00:00:00.000+00:00',
-            $collection[1]->start()->toIsoString()
-        );
-
-        $this->assertSame(
-            '2022-01-20T00:00:00.000+00:00',
-            $collection[1]->end()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[0]->includesEnd()
-        );
-
-        $this->assertFalse(
-            $collection[1]->includesStart()
-        );
-
-        $this->assertTrue(
-            $collection[1]->includesEnd()
         );
     }
 
@@ -421,6 +228,16 @@ trait DiffSymmetricTestTrait
         );
     }
 
+    public function testDiffSymmetricInvalidGranularity(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
+
+        $period1->diffSymmetric($period2);
+    }
+
     public function testDiffSymmetricNoOverlap(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-10');
@@ -469,14 +286,195 @@ trait DiffSymmetricTestTrait
         );
     }
 
-    public function testDiffSymmetricInvalidGranularity(): void
+    public function testDiffSymmetricStartAfter(): void
     {
-        $this->expectException(RuntimeException::class);
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2022-01-10', '2022-01-20');
+        $collection = $period1->diffSymmetric($period2);
 
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
+        $this->assertCount(
+            2,
+            $collection
+        );
 
-        $period1->diffSymmetric($period2);
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-15T00:00:00.000+00:00',
+            $collection[1]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-20T00:00:00.000+00:00',
+            $collection[1]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertFalse(
+            $collection[0]->includesEnd()
+        );
+
+        $this->assertFalse(
+            $collection[1]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[1]->includesEnd()
+        );
     }
 
+    public function testDiffSymmetricStartAfterExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2022-01-10', '2022-01-20', excludeBoundaries: 'start');
+        $collection = $period1->diffSymmetric($period2);
+
+        $this->assertCount(
+            2,
+            $collection
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-15T00:00:00.000+00:00',
+            $collection[1]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-20T00:00:00.000+00:00',
+            $collection[1]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesEnd()
+        );
+
+        $this->assertFalse(
+            $collection[1]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[1]->includesEnd()
+        );
+    }
+
+    public function testDiffSymmetricStartBefore(): void
+    {
+        $period1 = new Period('2022-01-10', '2022-01-15');
+        $period2 = new Period('2022-01-01', '2022-01-20');
+        $collection = $period1->diffSymmetric($period2);
+
+        $this->assertCount(
+            2,
+            $collection
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-15T00:00:00.000+00:00',
+            $collection[1]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-20T00:00:00.000+00:00',
+            $collection[1]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertFalse(
+            $collection[0]->includesEnd()
+        );
+
+        $this->assertFalse(
+            $collection[1]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[1]->includesEnd()
+        );
+    }
+
+    public function testDiffSymmetricStartBeforeExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'start');
+        $period2 = new Period('2022-01-01', '2022-01-20');
+        $collection = $period1->diffSymmetric($period2);
+
+        $this->assertCount(
+            2,
+            $collection
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $collection[0]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $collection[0]->end()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-15T00:00:00.000+00:00',
+            $collection[1]->start()->toIsoString()
+        );
+
+        $this->assertSame(
+            '2022-01-20T00:00:00.000+00:00',
+            $collection[1]->end()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[0]->includesEnd()
+        );
+
+        $this->assertFalse(
+            $collection[1]->includesStart()
+        );
+
+        $this->assertTrue(
+            $collection[1]->includesEnd()
+        );
+    }
 }

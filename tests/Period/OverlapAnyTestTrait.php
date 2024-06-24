@@ -9,7 +9,6 @@ use RuntimeException;
 
 trait OverlapAnyTestTrait
 {
-
     public function testOverlapAny(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-20');
@@ -48,18 +47,6 @@ trait OverlapAnyTestTrait
         );
     }
 
-    public function testOverlapAnyNoOverlaps(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-05');
-        $period2 = new Period('2022-01-10', '2022-01-15');
-        $period3 = new Period('2022-01-15', '2022-01-20');
-        $collection = $period1->overlapAny($period2, $period3);
-
-        $this->assertEmpty(
-            $collection
-        );
-    }
-
     public function testOverlapAnyInvalidGranularity(): void
     {
         $this->expectException(RuntimeException::class);
@@ -71,4 +58,15 @@ trait OverlapAnyTestTrait
         $period1->overlapAny($period2, $period3);
     }
 
+    public function testOverlapAnyNoOverlaps(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-05');
+        $period2 = new Period('2022-01-10', '2022-01-15');
+        $period3 = new Period('2022-01-15', '2022-01-20');
+        $collection = $period1->overlapAny($period2, $period3);
+
+        $this->assertEmpty(
+            $collection
+        );
+    }
 }

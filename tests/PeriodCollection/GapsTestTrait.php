@@ -8,7 +8,6 @@ use Fyre\Period\PeriodCollection;
 
 trait GapsTestTrait
 {
-
     public function testGaps(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05');
@@ -43,6 +42,18 @@ trait GapsTestTrait
 
         $this->assertFalse(
             $collection2[0]->includesEnd()
+        );
+    }
+
+    public function testGapsEmpty(): void
+    {
+        $collection1 = new PeriodCollection();
+
+        $collection2 = $collection1->gaps();
+
+        $this->assertCount(
+            0,
+            $collection2
         );
     }
 
@@ -112,17 +123,4 @@ trait GapsTestTrait
             $collection2[1]->end()->toIsoString()
         );
     }
-
-    public function testGapsEmpty(): void
-    {
-        $collection1 = new PeriodCollection();
-
-        $collection2 = $collection1->gaps();
-
-        $this->assertCount(
-            0,
-            $collection2
-        );
-    }
-
 }

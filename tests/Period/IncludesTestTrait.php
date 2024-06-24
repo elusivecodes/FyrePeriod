@@ -8,52 +8,26 @@ use Fyre\Period\Period;
 
 trait IncludesTestTrait
 {
-
-    public function testIncludesStart(): void
-    {
-        $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTime('2022-01-01'))
-        );
-    }
-
-    public function testIncludesStartBefore(): void
-    {
-        $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTime('2021-12-31'))
-        );
-    }
-
-    public function testIncludesStartBeforeExcludeStart(): void
-    {
-        $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
-                ->includes(new DateTime('2022-01-01'))
-        );
-    }
-
-    public function testIncludesStartAfter(): void
-    {
-        $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTime('2022-01-02'))
-        );
-    }
-
-
-    public function testIncludesStartAfterExcludeStart(): void
-    {
-        $this->assertTrue(
-            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
-                ->includes(new DateTime('2022-01-02'))
-        );
-    }
-
     public function testIncludesEnd(): void
     {
         $this->assertTrue(
             (new Period('2022-01-01', '2022-01-15'))
+                ->includes(new DateTime('2022-01-15'))
+        );
+    }
+
+    public function testIncludesEndAfter(): void
+    {
+        $this->assertFalse(
+            (new Period('2022-01-01', '2022-01-15'))
+                ->includes(new DateTime('2022-01-16'))
+        );
+    }
+
+    public function testIncludesEndAfterExcludeEnd(): void
+    {
+        $this->assertFalse(
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
                 ->includes(new DateTime('2022-01-15'))
         );
     }
@@ -74,20 +48,43 @@ trait IncludesTestTrait
         );
     }
 
-    public function testIncludesEndAfter(): void
+    public function testIncludesStart(): void
+    {
+        $this->assertTrue(
+            (new Period('2022-01-01', '2022-01-15'))
+                ->includes(new DateTime('2022-01-01'))
+        );
+    }
+
+    public function testIncludesStartAfter(): void
+    {
+        $this->assertTrue(
+            (new Period('2022-01-01', '2022-01-15'))
+                ->includes(new DateTime('2022-01-02'))
+        );
+    }
+
+    public function testIncludesStartAfterExcludeStart(): void
+    {
+        $this->assertTrue(
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
+                ->includes(new DateTime('2022-01-02'))
+        );
+    }
+
+    public function testIncludesStartBefore(): void
     {
         $this->assertFalse(
             (new Period('2022-01-01', '2022-01-15'))
-                ->includes(new DateTime('2022-01-16'))
+                ->includes(new DateTime('2021-12-31'))
         );
     }
 
-    public function testIncludesEndAfterExcludeEnd(): void
+    public function testIncludesStartBeforeExcludeStart(): void
     {
         $this->assertFalse(
-            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'end'))
-                ->includes(new DateTime('2022-01-15'))
+            (new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start'))
+                ->includes(new DateTime('2022-01-01'))
         );
     }
-
 }

@@ -8,47 +8,6 @@ use RuntimeException;
 
 trait OverlapsWithTestTrait
 {
-
-    public function testOverlapsWithStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2021-12-15', '2022-01-01');
-
-        $this->assertTrue(
-            $period1->overlapsWith($period2)
-        );
-    }
-
-    public function testOverlapsWithStartBefore(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2021-12-15', '2021-12-31');
-
-        $this->assertFalse(
-            $period1->overlapsWith($period2)
-        );
-    }
-
-    public function testOverlapsWithStartBeforeExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
-        $period2 = new Period('2021-12-15', '2022-01-01');
-
-        $this->assertFalse(
-            $period1->overlapsWith($period2)
-        );
-    }
-
-    public function testOverlapsWithStartBeforeExcludeEnd(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-15');
-        $period2 = new Period('2021-12-15', '2022-01-01', excludeBoundaries: 'end');
-
-        $this->assertFalse(
-            $period1->overlapsWith($period2)
-        );
-    }
-
     public function testOverlapsWithEnd(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
@@ -99,4 +58,43 @@ trait OverlapsWithTestTrait
         $period1->overlapsWith($period2);
     }
 
+    public function testOverlapsWithStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2021-12-15', '2022-01-01');
+
+        $this->assertTrue(
+            $period1->overlapsWith($period2)
+        );
+    }
+
+    public function testOverlapsWithStartBefore(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2021-12-15', '2021-12-31');
+
+        $this->assertFalse(
+            $period1->overlapsWith($period2)
+        );
+    }
+
+    public function testOverlapsWithStartBeforeExcludeEnd(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15');
+        $period2 = new Period('2021-12-15', '2022-01-01', excludeBoundaries: 'end');
+
+        $this->assertFalse(
+            $period1->overlapsWith($period2)
+        );
+    }
+
+    public function testOverlapsWithStartBeforeExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-15', excludeBoundaries: 'start');
+        $period2 = new Period('2021-12-15', '2022-01-01');
+
+        $this->assertFalse(
+            $period1->overlapsWith($period2)
+        );
+    }
 }

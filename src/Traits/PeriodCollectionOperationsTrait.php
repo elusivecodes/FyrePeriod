@@ -11,7 +11,6 @@ use Fyre\Period\PeriodCollection;
  */
 trait PeriodCollectionOperationsTrait
 {
-
     /**
      * Get the the gaps between the periods in the collection.
      * @return PeriodCollection A new PeriodCollection.
@@ -34,7 +33,7 @@ trait PeriodCollectionOperationsTrait
     {
         $intersected = new static();
 
-        foreach ($this AS $period) {
+        foreach ($this as $period) {
             $overlap = $other->overlap($period);
 
             if (!$overlap) {
@@ -56,7 +55,7 @@ trait PeriodCollectionOperationsTrait
     {
         $overlap = clone $this;
 
-        foreach ($others AS $other) {
+        foreach ($others as $other) {
             $overlap = $overlap->overlap($other);
         }
 
@@ -76,7 +75,7 @@ trait PeriodCollectionOperationsTrait
 
         $collection = new static();
 
-        foreach ($this AS $period) {
+        foreach ($this as $period) {
             $subtracted = $period->subtractAll(...$others);
             $collection = $collection->add(...$subtracted);
         }
@@ -97,12 +96,11 @@ trait PeriodCollectionOperationsTrait
 
         $collection = new static();
 
-        foreach ($this AS $period) {
+        foreach ($this as $period) {
             $overlaps = $period->overlapAny(...$others);
             $collection = $collection->add(...$overlaps);
         }
 
         return $collection;
     }
-
 }

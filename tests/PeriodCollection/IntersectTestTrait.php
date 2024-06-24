@@ -8,14 +8,13 @@ use Fyre\Period\PeriodCollection;
 
 trait IntersectTestTrait
 {
-
     public function testIntersect(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05');
         $period2 = new Period('2022-01-10', '2022-01-15');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-13');
+        $period3 = new Period('2022-01-03', '2022-01-13');
         $collection2 = $collection1->intersect($period3);
 
         $this->assertInstanceOf(
@@ -65,13 +64,26 @@ trait IntersectTestTrait
         );
     }
 
+    public function testIntersectEmpty(): void
+    {
+        $collection1 = new PeriodCollection();
+
+        $period3 = new Period('2022-01-03', '2022-01-13');
+        $collection2 = $collection1->intersect($period3);
+
+        $this->assertCount(
+            0,
+            $collection2
+        );
+    }
+
     public function testIntersectExclude(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-05', excludeBoundaries: 'both');
         $period2 = new Period('2022-01-10', '2022-01-15', excludeBoundaries: 'both');
         $collection1 = new PeriodCollection($period1, $period2);
 
-        $period3 = new Period('2022-01-03','2022-01-13', excludeBoundaries: 'both');
+        $period3 = new Period('2022-01-03', '2022-01-13', excludeBoundaries: 'both');
         $collection2 = $collection1->intersect($period3);
 
         $this->assertCount(
@@ -115,18 +127,4 @@ trait IntersectTestTrait
             $collection2[1]->includesEnd()
         );
     }
-
-    public function testIntersectEmpty(): void
-    {
-        $collection1 = new PeriodCollection();
-
-        $period3 = new Period('2022-01-03','2022-01-13');
-        $collection2 = $collection1->intersect($period3);
-
-        $this->assertCount(
-            0,
-            $collection2
-        );
-    }
-
 }

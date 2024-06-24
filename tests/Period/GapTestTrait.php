@@ -8,7 +8,6 @@ use RuntimeException;
 
 trait GapTestTrait
 {
-
     public function testGap(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-10');
@@ -18,38 +17,6 @@ trait GapTestTrait
         $this->assertInstanceOf(
             Period::class,
             $period3
-        );
-    }
-
-    public function testGapStartAfter(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20');
-        $period3 = $period1->gap($period2);
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $period3->start()->toIsoString()
-        );
-
-        $this->assertFalse(
-            $period3->includesStart()
-        );
-    }
-
-    public function testGapStartAfterExcludeStart(): void
-    {
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', excludeBoundaries: 'start');
-        $period3 = $period1->gap($period2);
-
-        $this->assertSame(
-            '2022-01-10T00:00:00.000+00:00',
-            $period3->start()->toIsoString()
-        );
-
-        $this->assertTrue(
-            $period3->includesEnd()
         );
     }
 
@@ -85,6 +52,16 @@ trait GapTestTrait
         );
     }
 
+    public function testGapInvalidGranularity(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
+
+        $period1->gap($period2);
+    }
+
     public function testGapOverlap(): void
     {
         $period1 = new Period('2022-01-01', '2022-01-15');
@@ -92,6 +69,38 @@ trait GapTestTrait
 
         $this->assertNull(
             $period1->gap($period2)
+        );
+    }
+
+    public function testGapStartAfter(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-15', '2022-01-20');
+        $period3 = $period1->gap($period2);
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $period3->start()->toIsoString()
+        );
+
+        $this->assertFalse(
+            $period3->includesStart()
+        );
+    }
+
+    public function testGapStartAfterExcludeStart(): void
+    {
+        $period1 = new Period('2022-01-01', '2022-01-10');
+        $period2 = new Period('2022-01-15', '2022-01-20', excludeBoundaries: 'start');
+        $period3 = $period1->gap($period2);
+
+        $this->assertSame(
+            '2022-01-10T00:00:00.000+00:00',
+            $period3->start()->toIsoString()
+        );
+
+        $this->assertTrue(
+            $period3->includesEnd()
         );
     }
 
@@ -104,15 +113,4 @@ trait GapTestTrait
             $period1->gap($period2)
         );
     }
-
-    public function testGapInvalidGranularity(): void
-    {
-        $this->expectException(RuntimeException::class);
-
-        $period1 = new Period('2022-01-01', '2022-01-10');
-        $period2 = new Period('2022-01-15', '2022-01-20', 'hour');
-
-        $period1->gap($period2);
-    }
-
 }

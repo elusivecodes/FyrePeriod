@@ -11,29 +11,28 @@ use RuntimeException;
 
 final class PeriodTest extends TestCase
 {
-
     use ContainsTestTrait;
     use DiffSymmetricTestTrait;
     use EndEqualsTestTrait;
-    use EndsAfterTestTrait;
     use EndsAfterOrEqualsTestTrait;
-    use EndsBeforeTestTrait;
+    use EndsAfterTestTrait;
     use EndsBeforeOrEqualsTestTrait;
+    use EndsBeforeTestTrait;
     use EqualsTestTrait;
     use GapTestTrait;
     use IncludesTestTrait;
-    use OverlapTestTrait;
     use OverlapAllTestTrait;
     use OverlapAnyTestTrait;
     use OverlapsWithTestTrait;
+    use OverlapTestTrait;
     use RenewTestTrait;
     use StartEqualsTestTrait;
-    use StartsAfterTestTrait;
     use StartsAfterOrEqualsTestTrait;
-    use StartsBeforeTestTrait;
+    use StartsAfterTestTrait;
     use StartsBeforeOrEqualsTestTrait;
-    use SubtractTestTrait;
+    use StartsBeforeTestTrait;
     use SubtractAllTestTrait;
+    use SubtractTestTrait;
     use TouchesTestTrait;
 
     public function testConstructor(): void
@@ -90,13 +89,6 @@ final class PeriodTest extends TestCase
         new Period('2022-01-10', '2022-01-01');
     }
 
-    public function testConstructorInvalidGranularity(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new Period('2022-01-01', '2022-01-10', 'invalid');
-    }
-
     public function testConstructorInvalidExcludeBoundaries(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -104,36 +96,11 @@ final class PeriodTest extends TestCase
         new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'invalid');
     }
 
-    public function testLength(): void
+    public function testConstructorInvalidGranularity(): void
     {
-        $this->assertSame(
-            9,
-            (new Period('2022-01-01', '2022-01-10'))->length()
-        );
-    }
+        $this->expectException(InvalidArgumentException::class);
 
-    public function testLengthExcludeStart(): void
-    {
-        $this->assertSame(
-            8,
-            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->length()
-        );
-    }
-
-    public function testLengthExcludeEnd(): void
-    {
-        $this->assertSame(
-            8,
-            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end'))->length()
-        );
-    }
-
-    public function testLengthGranularity(): void
-    {
-        $this->assertSame(
-            24,
-            (new Period('2022-01-01', '2022-01-02', 'hour'))->length()
-        );
+        new Period('2022-01-01', '2022-01-10', 'invalid');
     }
 
     public function testEnd(): void
@@ -262,47 +229,17 @@ final class PeriodTest extends TestCase
         );
     }
 
-    public function testStart(): void
-    {
-        $start = (new Period('2022-01-01', '2022-01-10'))->start();
-
-        $this->assertInstanceOf(
-            DateTime::class,
-            $start
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $start->toIsoString()
-        );
-    }
-
-    public function testStartExcludeStart(): void
-    {
-        $start = (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->start();
-
-        $this->assertInstanceOf(
-            DateTime::class,
-            $start
-        );
-
-        $this->assertSame(
-            '2022-01-01T00:00:00.000+00:00',
-            $start->toIsoString()
-        );
-    }
-
     public function testIteration(): void
     {
         $period = new Period('2022-01-01', '2022-01-02', 'hour');
 
         $dates = [];
-        foreach ($period AS $date) {
+        foreach ($period as $date) {
             $this->assertInstanceOf(
                 DateTime::class,
                 $date
             );
-    
+
             $dates[] = $date->toIsoString();
         }
 
@@ -343,12 +280,12 @@ final class PeriodTest extends TestCase
         $period = new Period('2022-01-01', '2022-01-02', 'hour', 'both');
 
         $dates = [];
-        foreach ($period AS $date) {
+        foreach ($period as $date) {
             $this->assertInstanceOf(
                 DateTime::class,
                 $date
             );
-    
+
             $dates[] = $date->toIsoString();
         }
 
@@ -382,4 +319,65 @@ final class PeriodTest extends TestCase
         );
     }
 
+    public function testLength(): void
+    {
+        $this->assertSame(
+            9,
+            (new Period('2022-01-01', '2022-01-10'))->length()
+        );
+    }
+
+    public function testLengthExcludeEnd(): void
+    {
+        $this->assertSame(
+            8,
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'end'))->length()
+        );
+    }
+
+    public function testLengthExcludeStart(): void
+    {
+        $this->assertSame(
+            8,
+            (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->length()
+        );
+    }
+
+    public function testLengthGranularity(): void
+    {
+        $this->assertSame(
+            24,
+            (new Period('2022-01-01', '2022-01-02', 'hour'))->length()
+        );
+    }
+
+    public function testStart(): void
+    {
+        $start = (new Period('2022-01-01', '2022-01-10'))->start();
+
+        $this->assertInstanceOf(
+            DateTime::class,
+            $start
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $start->toIsoString()
+        );
+    }
+
+    public function testStartExcludeStart(): void
+    {
+        $start = (new Period('2022-01-01', '2022-01-10', excludeBoundaries: 'start'))->start();
+
+        $this->assertInstanceOf(
+            DateTime::class,
+            $start
+        );
+
+        $this->assertSame(
+            '2022-01-01T00:00:00.000+00:00',
+            $start->toIsoString()
+        );
+    }
 }
