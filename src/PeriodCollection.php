@@ -27,6 +27,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     /**
      * New PeriodCollection constructor.
+     *
      * @param Period ...$periods The periods.
      */
     public function __construct(Period ...$periods)
@@ -36,6 +37,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     /**
      * Add periods to the collection.
+     *
      * @param Period ...$periods The periods to add.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -46,6 +48,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     /**
      * Get the boundaries of the collection.
+     *
      * @return Period|null A new Period.
      */
     public function boundaries(): Period|null
@@ -76,6 +79,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     /**
      * Sort the periods.
+     *
      * @return PeriodCollection A new PeriodCollection.
      */
     public function sort(): static
@@ -89,6 +93,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     /**
      * Filter the periods to remove duplicates.
+     *
      * @return PeriodCollection A new PeriodCollection.
      */
     public function unique(): static

@@ -14,6 +14,7 @@ trait PeriodIterableTrait
 
     /**
      * Get the period length.
+     *
      * @return int The period length.
      */
     public function count(): int
@@ -23,6 +24,7 @@ trait PeriodIterableTrait
 
     /**
      * Get the date at the current index.
+     *
      * @return DateTime The date at the current index.
      */
     public function current(): DateTime
@@ -32,6 +34,7 @@ trait PeriodIterableTrait
 
     /**
      * Get the current index.
+     *
      * @return int The current index.
      */
     public function key(): int
@@ -57,6 +60,7 @@ trait PeriodIterableTrait
 
     /**
      * Determine if the current index is valid.
+     *
      * @return bool TRUE if the current index is valid, otherwise FALSE.
      */
     public function valid(): bool

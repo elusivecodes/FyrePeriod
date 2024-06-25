@@ -13,6 +13,7 @@ trait PeriodCollectionOperationsTrait
 {
     /**
      * Get the the gaps between the periods in the collection.
+     *
      * @return PeriodCollection A new PeriodCollection.
      */
     public function gaps(): static
@@ -26,6 +27,7 @@ trait PeriodCollectionOperationsTrait
 
     /**
      * Intersect a period with every period in the collection.
+     *
      * @param Period $period The Period to compare against.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -48,6 +50,7 @@ trait PeriodCollectionOperationsTrait
 
     /**
      * Get the overlap of all the collections.
+     *
      * @param PeriodCollection $others The collections to compare against.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -64,6 +67,7 @@ trait PeriodCollectionOperationsTrait
 
     /**
      * Get the inverse overlap of the collections.
+     *
      * @param PeriodCollection $others The collection to remove.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -85,6 +89,7 @@ trait PeriodCollectionOperationsTrait
 
     /**
      * Get the overlap of the collections.
+     *
      * @param PeriodCollection $others The PeriodCollection to compare against.
      * @return PeriodCollection A new PeriodCollection.
      */

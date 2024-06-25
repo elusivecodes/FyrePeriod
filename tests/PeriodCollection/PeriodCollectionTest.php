@@ -69,7 +69,7 @@ final class PeriodCollectionTest extends TestCase
         $this->assertSame(
             [
                 '2022-01-01T00:00:00.000+00:00',
-                '2022-01-05T00:00:00.000+00:00'
+                '2022-01-05T00:00:00.000+00:00',
             ],
             $dates
         );

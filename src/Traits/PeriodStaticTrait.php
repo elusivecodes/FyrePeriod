@@ -16,6 +16,7 @@ trait PeriodStaticTrait
 {
     /**
      * Get the boundary string.
+     *
      * @param bool $includesStart Whether the Period includes the start.
      * @param bool $includesEnd Whether the Period includes the end.
      * @return string The boundary string.
@@ -39,6 +40,7 @@ trait PeriodStaticTrait
 
     /**
      * Add an amount of time to a date (by granularity).
+     *
      * @param DateTime $date The DateTime.
      * @param int $amount The amount of time to add.
      * @param string|null $granularity The granularity.
@@ -58,8 +60,10 @@ trait PeriodStaticTrait
 
     /**
      * Check granularity of two periods.
+     *
      * @param Period $a The first Period.
      * @param Period $b The second Period.
+     *
      * @throws RuntimeException if the granularity doesn't match.
      */
     protected static function checkGranularity(Period $a, Period $b): void
@@ -73,6 +77,7 @@ trait PeriodStaticTrait
 
     /**
      * Create a DateTime.
+     *
      * @param DateTime|string $date The input date.
      * @return DateTime The DateTime.
      */
@@ -87,6 +92,7 @@ trait PeriodStaticTrait
 
     /**
      * Get the difference between two dates (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -107,6 +113,7 @@ trait PeriodStaticTrait
 
     /**
      * Determine if a date is after another date (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -127,6 +134,7 @@ trait PeriodStaticTrait
 
     /**
      * Determine if a date is before another date (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -147,6 +155,7 @@ trait PeriodStaticTrait
 
     /**
      * Determine if a date is the same as another date (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -167,6 +176,7 @@ trait PeriodStaticTrait
 
     /**
      * Determine if a date is the same as or after another date (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -187,6 +197,7 @@ trait PeriodStaticTrait
 
     /**
      * Determine if a date is the same as or before another date (based on granularity).
+     *
      * @param DateTime $a The first date.
      * @param DateTime $b The second date.
      * @param string|null $granularity The granularity.
@@ -207,6 +218,7 @@ trait PeriodStaticTrait
 
     /**
      * Subtract an amount of time from a date (by granularity).
+     *
      * @param DateTime $date The DateTime.
      * @param int $amount The amount of time to subtract.
      * @param string|null $granularity The granularity.

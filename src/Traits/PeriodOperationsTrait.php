@@ -13,6 +13,7 @@ trait PeriodOperationsTrait
 {
     /**
      * Get the symmetric difference between the periods.
+     *
      * @param Period $other The Period to compare against.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -30,6 +31,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the gap between the periods.
+     *
      * @param Period $other The Period to compare against.
      * @return Period|null A new Period.
      */
@@ -60,6 +62,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the overlap of the periods.
+     *
      * @param Period $other The Period to compare against.
      * @return Period|null A new Period.
      */
@@ -87,6 +90,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the overlap of all the periods.
+     *
      * @param Period ...$others The periods to compare against.
      * @return Period|null A new Period.
      */
@@ -112,6 +116,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the overlaps of any of the periods.
+     *
      * @param Period ...$others The periods to compare against.
      * @return PeriodCollection|null A new PeriodCollection.
      */
@@ -134,6 +139,7 @@ trait PeriodOperationsTrait
 
     /**
      * Create a new period with the same length after this period.
+     *
      * @return Period A new Period.
      */
     public function renew(): static
@@ -150,6 +156,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the inverse overlap of the periods.
+     *
      * @param Period $other The period to remove.
      * @return PeriodCollection A new PeriodCollection.
      */
@@ -186,6 +193,7 @@ trait PeriodOperationsTrait
 
     /**
      * Get the inverse overlap of all periods.
+     *
      * @param Period ...$others The periods to compare against.
      * @return PeriodCollection A new PeriodCollection.
      */

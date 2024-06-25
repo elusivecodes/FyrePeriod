@@ -17,6 +17,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Get the Period count.
+     *
      * @return int The Period count.
      */
     public function count(): int
@@ -26,6 +27,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Get the Period at the current index.
+     *
      * @return Period The Period at the current index.
      */
     public function current(): Period
@@ -35,6 +37,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Get the current index.
+     *
      * @return int The current index.
      */
     public function key(): int
@@ -52,6 +55,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Determine if an index exists.
+     *
      * @param mixed $index The index.
      * @return bool TRUE if the index is set, otherwise FALSE.
      */
@@ -62,6 +66,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Get the Period at an index.
+     *
      * @param mixed $index The index.
      * @return Period|null The Period at an index.
      */
@@ -72,6 +77,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Set the Period at an index.
+     *
      * @param mixed $index The index.
      * @param mixed $value The Period.
      */
@@ -86,6 +92,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Unset an index.
+     *
      * @param mixed $index The index.
      */
     public function offsetUnset(mixed $index): void
@@ -103,6 +110,7 @@ trait PeriodCollectionIterableTrait
 
     /**
      * Determine if the current index is valid.
+     *
      * @return bool TRUE if the current index is valid, otherwise FALSE.
      */
     public function valid(): bool

@@ -31,7 +31,7 @@ class Period implements Countable, Iterator
         'both' => [false, false],
         'start' => [false, true],
         'end' => [true, false],
-        'none' => [true, true]
+        'none' => [true, true],
     ];
 
     protected const GRANULARITIES = [
@@ -40,23 +40,31 @@ class Period implements Countable, Iterator
         'day',
         'hour',
         'minute',
-        'second'
+        'second',
     ];
 
     protected DateTime $end;
+
     protected string|null $granularity;
+
     protected DateTime $includedEnd;
+
     protected DateTime $includedStart;
+
     protected bool $includesEnd;
+
     protected bool $includesStart;
+
     protected DateTime $start;
 
     /**
      * New Period constructor.
+     *
      * @param DateTime|null $start The start date.
      * @param DateTime|null $end The end date.
      * @param string $granularity The granularity.
      * @param string $excludeBoundaries The boundaries to exclude.
+     *
      * @throws InvalidArgumentException if the granularity or boundaries are not valid.
      * @throws RuntimeException If the end date is before the start date.
      */
@@ -97,6 +105,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the end date.
+     *
      * @return DateTime The end date
      */
     public function end(): DateTime
@@ -106,6 +115,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the granularity.
+     *
      * @return string The granularity.
      */
     public function granularity(): string
@@ -115,6 +125,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the included end date.
+     *
      * @return DateTime The included end date
      */
     public function includedEnd(): DateTime
@@ -124,6 +135,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the included start date.
+     *
      * @return DateTime The included start date
      */
     public function includedStart(): DateTime
@@ -133,6 +145,7 @@ class Period implements Countable, Iterator
 
     /**
      * Determine if the Period includes the end date.
+     *
      * @return bool TRUE if the Period includes the end date, otherwise FALSE.
      */
     public function includesEnd(): bool
@@ -142,6 +155,7 @@ class Period implements Countable, Iterator
 
     /**
      * Determine if the Period includes the start date.
+     *
      * @return bool TRUE if the Period includes the start date, otherwise FALSE.
      */
     public function includesStart(): bool
@@ -151,6 +165,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the length of the period.
+     *
      * @return int The length of the period.
      */
     public function length(): int
@@ -160,6 +175,7 @@ class Period implements Countable, Iterator
 
     /**
      * Get the start date.
+     *
      * @return DateTime The start date
      */
     public function start(): DateTime
