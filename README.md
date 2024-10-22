@@ -18,15 +18,12 @@
 composer require fyre/period
 ```
 
-In PHP:
+
+## Periods
 
 ```php
 use Fyre\Period\Period;
-use Fyre\Period\PeriodCollection;
 ```
-
-
-## Periods
 
 - `$start` is a [*DateTime*](https://github.com/elusivecodes/FyreDateTime) or string representing the start date.
 - `$end` is a [*DateTime*](https://github.com/elusivecodes/FyreDateTime) or string representing the end date.
@@ -45,7 +42,7 @@ foreach ($period AS $date) { }
 
 **Contains**
 
-Determine if this period contains another *Period*.
+Determine whether this period contains another *Period*.
 
 - `$other` is the *Period* to compare against.
 
@@ -77,7 +74,7 @@ This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateT
 
 **End Equals**
 
-Determine if this period ends on a given date.
+Determine whether this period ends on a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -87,7 +84,7 @@ $endEquals = $period->endEquals($date);
 
 **Ends After**
 
-Determine if this period ends after a given date.
+Determine whether this period ends after a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -97,7 +94,7 @@ $endsAfter = $period->endsAfter($date);
 
 **Ends After Or Equals**
 
-Determine if this period ends on or after a given date.
+Determine whether this period ends on or after a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -107,7 +104,7 @@ $endsAfterOrEquals = $period->endsAfterOrEquals($date);
 
 **Ends Before**
 
-Determine if this period ends before a given date.
+Determine whether this period ends before a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -117,7 +114,7 @@ $endsBefore = $period->endsBefore($date);
 
 **Ends Before Or Equals**
 
-Determine if this period ends on or before a given date.
+Determine whether this period ends on or before a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -127,7 +124,7 @@ $endsBeforeOrEquals = $period->endsBeforeOrEquals($date);
 
 **Equals**
 
-Determine if this period equals another Period.
+Determine whether this period equals another Period.
 
 - `$other` is the *Period* to compare against.
 
@@ -177,7 +174,7 @@ This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateT
 
 **Includes End**
 
-Determine if the Period includes the end date.
+Determine whether the Period includes the end date.
 
 ```php
 $includesEnd = $period->includesEnd();
@@ -185,7 +182,7 @@ $includesEnd = $period->includesEnd();
 
 **Includes**
 
-Determine if this period includes a given date.
+Determine whether this period includes a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -195,7 +192,7 @@ $includes = $period->includes($date);
 
 **Includes Start**
 
-Determine if the Period includes the start date.
+Determine whether the Period includes the start date.
 
 ```php
 $includesStart = $period->includesStart();
@@ -243,7 +240,7 @@ This method will return a new [*PeriodCollection*](#period-collections).
 
 **Overlaps With**
 
-Determine if this period overlaps with another Period.
+Determine whether this period overlaps with another Period.
 
 - `$other` is the *Period* to compare against.
 
@@ -273,7 +270,7 @@ This method will return a [*DateTime*](https://github.com/elusivecodes/FyreDateT
 
 **Start Equals**
 
-Determine if this period starts on a given date.
+Determine whether this period starts on a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -283,7 +280,7 @@ $startEquals = $period->startEquals($date);
 
 **Starts After**
 
-Determine if this period starts after a given date.
+Determine whether this period starts after a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -293,7 +290,7 @@ $startsAfter = $period->startsAfter($date);
 
 **Starts After Or Equals**
 
-Determine if this period starts on or after a given date.
+Determine whether this period starts on or after a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -303,7 +300,7 @@ $startsAfterOrEquals = $period->startsAfterOrEquals($date);
 
 **Starts Before**
 
-Determine if this period starts before a given date.
+Determine whether this period starts before a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -313,7 +310,7 @@ $startsBefore = $period->startsBefore($date);
 
 **Starts Before Or Equals**
 
-Determine if this period starts on or before a given date.
+Determine whether this period starts on or before a given date.
 
 - `$date` is the [*DateTime*](https://github.com/elusivecodes/FyreDateTime) to compare against.
 
@@ -345,7 +342,7 @@ This method will return a new [*PeriodCollection*](#period-collections).
 
 **Touches**
 
-Determine if this period touches another Period.
+Determine whether this period touches another Period.
 
 - `$other` is the *Period* to compare against.
 
@@ -355,6 +352,10 @@ $touches = $period->touches($other);
 
 
 ## Period Collections
+
+```php
+use Fyre\Period\PeriodCollection;
+```
 
 All arguments supplied will be used as periods for the collection.
 
