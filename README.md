@@ -360,13 +360,13 @@ use Fyre\Period\PeriodCollection;
 All arguments supplied will be used as periods for the collection.
 
 ```php
-$collection = new PeriodCollection(...$periods);
+$periodCollection = new PeriodCollection(...$periods);
 ```
 
 The *PeriodCollection* is an implementation of an *Iterator* and can be used in a foreach loop.
 
 ```php
-foreach ($collection AS $period) { }
+foreach ($periodCollection AS $period) { }
 ```
 
 **Add**
@@ -376,7 +376,7 @@ Add periods to the collection.
 All arguments supplied will be used as periods to add to the collection.
 
 ```php
-$added = $collection->add(...$periods);
+$added = $periodCollection->add(...$periods);
 ```
 
 This method will return a new *PeriodCollection*.
@@ -386,7 +386,7 @@ This method will return a new *PeriodCollection*.
 Get the boundaries of the collection.
 
 ```php
-$boundaries = $collection->boundaries();
+$boundaries = $periodCollection->boundaries();
 ```
 
 This method will return a new [*Period*](#periods), or *null* if the collection is empty.
@@ -396,7 +396,7 @@ This method will return a new [*Period*](#periods), or *null* if the collection 
 Get the the gaps between the periods in the collection.
 
 ```php
-$gaps = $collection->gaps();
+$gaps = $periodCollection->gaps();
 ```
 
 This method will return a new *PeriodCollection*.
@@ -408,7 +408,7 @@ Intersect a period with every period in the collection.
 - `$period` is the [*Period*](#periods) to compare against.
 
 ```php
-$intersect = $collection->intersect($period);
+$intersect = $periodCollection->intersect($period);
 ```
 
 This method will return a new *PeriodCollection*.
@@ -420,7 +420,7 @@ Get the overlap of all the collections.
 All arguments supplied will be used as collections to compare against.
 
 ```php
-$overlapAll = $collection->overlapAll(...$others);
+$overlapAll = $periodCollection->overlapAll(...$others);
 ```
 
 This method will return a new *PeriodCollection*.
@@ -430,7 +430,7 @@ This method will return a new *PeriodCollection*.
 Sort the periods.
 
 ```php
-$sorted = $collection->sort();
+$sorted = $periodCollection->sort();
 ```
 
 This method will return a new *PeriodCollection*.
@@ -442,7 +442,7 @@ Get the inverse overlap of the collections.
 - `$others` is the *PeriodCollection* to compare against.
 
 ```php
-$subtract = $collection->subtract($others);
+$subtract = $periodCollection->subtract($others);
 ```
 
 This method will return a new *PeriodCollection*.
@@ -452,7 +452,7 @@ This method will return a new *PeriodCollection*.
 Filter the periods to remove duplicates.
 
 ```php
-$unique = $collection->unique();
+$unique = $periodCollection->unique();
 ```
 
 This method will return a new *PeriodCollection*.
