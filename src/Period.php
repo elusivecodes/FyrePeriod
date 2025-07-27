@@ -5,6 +5,7 @@ namespace Fyre\Period;
 
 use Countable;
 use Fyre\DateTime\DateTime;
+use Fyre\Utility\Traits\MacroTrait;
 use InvalidArgumentException;
 use Iterator;
 use RuntimeException;
@@ -19,6 +20,8 @@ use function strtolower;
  */
 class Period implements Countable, Iterator
 {
+    use MacroTrait;
+
     protected const BOUNDARIES = [
         'both' => [false, false],
         'start' => [false, true],

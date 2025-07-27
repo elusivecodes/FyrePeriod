@@ -5,6 +5,7 @@ namespace Fyre\Period;
 
 use ArrayAccess;
 use Countable;
+use Fyre\Utility\Traits\MacroTrait;
 use Iterator;
 
 use function array_filter;
@@ -20,6 +21,8 @@ use const ARRAY_FILTER_USE_BOTH;
  */
 class PeriodCollection implements ArrayAccess, Countable, Iterator
 {
+    use MacroTrait;
+
     protected int $index = 0;
 
     protected array $periods = [];

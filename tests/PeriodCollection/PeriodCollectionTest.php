@@ -5,7 +5,10 @@ namespace Tests\PeriodCollection;
 
 use Fyre\Period\Period;
 use Fyre\Period\PeriodCollection;
+use Fyre\Utility\Traits\MacroTrait;
 use PHPUnit\Framework\TestCase;
+
+use function class_uses;
 
 final class PeriodCollectionTest extends TestCase
 {
@@ -72,6 +75,14 @@ final class PeriodCollectionTest extends TestCase
                 '2022-01-05T00:00:00.000+00:00',
             ],
             $dates
+        );
+    }
+
+    public function testMacroable(): void
+    {
+        $this->assertContains(
+            MacroTrait::class,
+            class_uses(PeriodCollection::class)
         );
     }
 

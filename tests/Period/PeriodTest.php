@@ -5,9 +5,12 @@ namespace Tests\Period;
 
 use Fyre\DateTime\DateTime;
 use Fyre\Period\Period;
+use Fyre\Utility\Traits\MacroTrait;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+
+use function class_uses;
 
 final class PeriodTest extends TestCase
 {
@@ -348,6 +351,14 @@ final class PeriodTest extends TestCase
         $this->assertSame(
             24,
             (new Period('2022-01-01', '2022-01-02', 'hour'))->length()
+        );
+    }
+
+    public function testMacroable(): void
+    {
+        $this->assertContains(
+            MacroTrait::class,
+            class_uses(Period::class)
         );
     }
 
