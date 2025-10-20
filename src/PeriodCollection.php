@@ -235,7 +235,10 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
     {
         $periods = $this->periods;
 
-        usort($periods, fn(Period $a, Period $b) => $a->includedStart()->getTimestamp() <=> $b->includedStart()->getTimestamp());
+        usort(
+            $periods,
+            static fn(Period $a, Period $b) => $a->includedStart()->getTimestamp() <=> $b->includedStart()->getTimestamp()
+        );
 
         return new static(...$periods);
     }
