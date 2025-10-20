@@ -38,21 +38,21 @@ class Period implements Countable, Iterator
         'second',
     ];
 
-    protected DateTime $end;
+    protected readonly DateTime $end;
 
-    protected string|null $granularity;
+    protected readonly string|null $granularity;
 
-    protected DateTime $includedEnd;
+    protected readonly DateTime $includedEnd;
 
-    protected DateTime $includedStart;
+    protected readonly DateTime $includedStart;
 
-    protected bool $includesEnd;
+    protected readonly bool $includesEnd;
 
-    protected bool $includesStart;
+    protected readonly bool $includesStart;
 
     protected int $index = 0;
 
-    protected DateTime $start;
+    protected readonly DateTime $start;
 
     /**
      * Get the boundary string.

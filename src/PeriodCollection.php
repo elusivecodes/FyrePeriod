@@ -25,7 +25,7 @@ class PeriodCollection implements ArrayAccess, Countable, Iterator
 
     protected int $index = 0;
 
-    protected array $periods = [];
+    protected array $periods;
 
     /**
      * New PeriodCollection constructor.
